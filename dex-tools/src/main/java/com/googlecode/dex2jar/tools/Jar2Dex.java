@@ -29,8 +29,6 @@ import java.util.List;
 @BaseCmd.Syntax(cmd = "d2j-jar2dex", syntax = "[options] <dir>", desc = "Convert jar to dex by invoking dx.")
 public class Jar2Dex extends BaseCmd {
     public static void main(String... args) {
-        args = new String[]{"-f", "/Users/milk/Documents/works/idea_workspace/xy2Game-1.0.0_string-jar2dex-dex2jar.jar"};
-//        args = new String[]{"-f", "/Users/milk/Downloads/xy2Game-1.0.0_string.jar"};
         new Jar2Dex().doMain(args);
     }
 
