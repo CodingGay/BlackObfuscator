@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group 'com.googlecode.d2j'
+version '2.2-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':dex-ir')
+    compile 'org.ow2.asm:asm-debug-all:5.0.3'
+}
