@@ -8,6 +8,7 @@ dependencies {
   compile project(':d2j-smali')
   compile project(':d2j-jasmin')
   compile project(':dex-writer')
+  compile project(':dex-obfuscator')
   compile project(':d2j-base-cmd')
   compile project(':dexlib2')
 }
