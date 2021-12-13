@@ -1,13 +1,13 @@
 /*
  * dex2jar - Tools to work with android .dex and java .class files
  * Copyright (c) 2009-2012 Panxiaobo
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,6 +27,7 @@ import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @BaseCmd.Syntax(cmd = "d2j-black-obfuscator", syntax = "[options] <file0> [file1 ... fileN]", desc = "convert dex to jar")
 public class BlackObfuscatorCmd extends BaseCmd {
@@ -35,64 +36,68 @@ public class BlackObfuscatorCmd extends BaseCmd {
         new BlackObfuscatorCmd().doMain(args);
     }
 
-    @Opt(opt = "e", longOpt = "exception-file", description = "detail exception file, default is $current_dir/[file-name]-error.zip", argName = "file")
-    private Path exceptionFile;
-    @Opt(opt = "f", longOpt = "force", hasArg = false, description = "force overwrite")
-    private boolean forceOverwrite = false;
-    @Opt(opt = "n", longOpt = "not-handle-exception", hasArg = false, description = "not handle any exceptions thrown by dex2jar")
-    private boolean notHandleException = false;
-    @Opt(opt = "o", longOpt = "output", description = "output .jar file, default is $current_dir/[file-name]-dex2jar.jar", argName = "out-jar-file")
+    @Opt(opt = "d", longOpt = "depth", description = "混淆深度")
+    private int depth;
+
+    @Opt(opt = "i", longOpt = "input", description = "源Dex地址")
+    private Path input;
+
+    @Opt(opt = "o", longOpt = "output", description = "混淆生成的Dex保存的位置")
     private Path output;
 
-    @Opt(opt = "r", longOpt = "reuse-reg", hasArg = false, description = "reuse register while generate java .class file")
-    private boolean reuseReg = false;
+    @Opt(opt = "p", longOpt = "package", description = "要处理的包名,简单过滤")
+    private String pkg;
 
-    @Opt(opt = "s", hasArg = false, description = "same with --topological-sort/-ts")
-    private boolean topologicalSort1 = false;
-
-    @Opt(opt = "ts", longOpt = "topological-sort", hasArg = false, description = "sort block by topological, that will generate more readable code, default enabled")
-    private boolean topologicalSort = false;
-
-    @Opt(opt = "d", longOpt = "debug-info", hasArg = false, description = "translate debug info")
-    private boolean debugInfo = false;
-
-    @Opt(opt = "p", longOpt = "print-ir", hasArg = false, description = "print ir to System.out")
-    private boolean printIR = false;
-
-    @Opt(opt = "os", longOpt = "optmize-synchronized", hasArg = false, description = "optimize-synchronized")
-    private boolean optmizeSynchronized = false;
-
-    @Opt(longOpt = "skip-exceptions", hasArg = false, description = "skip-exceptions")
-    private boolean skipExceptions = false;
-
-    @Opt(opt = "nc", longOpt = "no-code", hasArg = false, description = "")
-    private boolean noCode = false;
+//    todo
+//    @Opt(opt = "a",longOpt = "allow",description = "要处理的类以及方法的txt文件")
+//    private Path allowList;
+//
+//    @Opt(opt = "d",longOpt = "disallow",description = "不处理的类以及方法的txt文件")
+//    private Path disallowList;
 
     public BlackObfuscatorCmd() {
     }
 
     @Override
     protected void doCommandLine() throws Exception {
-        // todo
+
         try {
-            // 1.dex2jar
+            input = input.toAbsolutePath();
+
+            if (output == null) {
+                output = Paths.get("./", "obf.dex");
+            }
+
+            output = output.toAbsolutePath();
+
+            Path tempJar = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.jar");
+            Path tempDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.dex");
+
+
+//             1.dex2jar
             new Dex2jarCmd(new ObfuscatorConfiguration() {
                 @Override
                 protected int getObfDepth() {
-                    return super.getObfDepth();
+                    return depth;
                 }
 
                 @Override
                 protected boolean accept(String className, String methodName) {
-                    return true;
+                    return className.startsWith(pkg);
                 }
-            }).doMain("-f", "inputDex");
-            // 2.jar2dex
-            new Jar2Dex().doMain("-f", "inputJar");
-            // 3.fix dex
-            DexLib2Utils.saveDex(new File("inputDex"),
-                    new File("outputDex"));
-            // 4.delete tmp file
+
+            }).doMain("-f", input.toString(), "-o", tempJar.toString());
+
+//             2.jar2dex
+            new Jar2Dex().doMain("-f", "-o", tempDex.toString(), tempJar.toString());
+//             3.fix dex
+            DexLib2Utils.saveDex(new File(tempDex.toString()),
+                    new File(output.toString()));
+
+//             4.delete tmp file
+            tempJar.toFile().delete();
+            tempDex.toFile().delete();
+
         } catch (Throwable t) {
             t.printStackTrace();
             // todo
