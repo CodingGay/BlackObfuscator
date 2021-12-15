@@ -13,7 +13,9 @@ import org.jf.smali.SmaliOptions;
 import org.jf.util.IndentingWriter;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class DexLib2Utils {
@@ -27,6 +29,59 @@ public class DexLib2Utils {
 				Smali.assembleSmaliFile(classToSmali(def), dexBuilder, new SmaliOptions());
 			}
 			return saveDexFileDexLib2(dexBuilder, out.getAbsolutePath());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean splitDex(File in, File out, List<String> className) {
+		try {
+			List<String> convertList = new ArrayList<>();
+			for (String s : className) {
+				if (!s.startsWith("L") && !s.endsWith(";")) {
+					convertList.add("L" + s.replace(".", "/"));
+				} else {
+					convertList.add(s);
+				}
+			}
+			DexBackedDexFile dexBackedDexFile = loadBackedDexFile(in.getAbsolutePath());
+			DexBuilder dexBuilder = new DexBuilder(Opcodes.getDefault());
+			Set<? extends DexBackedClassDef> defs = dexBackedDexFile.getClasses();
+			for (String sp : convertList) {
+				for (DexBackedClassDef def : defs) {
+					if (def.getType().contains(sp)) {
+						Smali.assembleSmaliFile(classToSmali(def), dexBuilder, new SmaliOptions());
+					}
+				}
+			}
+			return saveDexFileDexLib2(dexBuilder, out.getAbsolutePath());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean mergerAndCoverDexFile(File mainDex, File secondDex, File outDexFile) {
+		try {
+			DexBackedDexFile mainDexFile = loadBackedDexFile(mainDex.getAbsolutePath());
+			DexBackedDexFile secondDexFile = loadBackedDexFile(secondDex.getAbsolutePath());
+
+			DexBuilder dexBuilder = new DexBuilder(Opcodes.getDefault());
+			List<String> inserted = new ArrayList<>();
+			Set<? extends DexBackedClassDef> secondDefs = secondDexFile.getClasses();
+			for (DexBackedClassDef def : secondDefs) {
+				inserted.add(def.getType());
+				dexBuilder.internClassDef(def);
+			}
+
+			Set<? extends DexBackedClassDef> mainDefs = mainDexFile.getClasses();
+			for (DexBackedClassDef def : mainDefs) {
+				if (!inserted.contains(def.getType())) {
+					dexBuilder.internClassDef(def);
+				}
+			}
+			return saveDexFileDexLib2(dexBuilder, outDexFile.getAbsolutePath());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

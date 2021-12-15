@@ -74,6 +74,12 @@ public class BlackObfuscatorCmd extends BaseCmd {
             Path tempDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.dex");
 
 
+            // 先分离用户的白名单
+//            DexLib2Utils.splitDex(in, out, whileList);
+            // 处理分离出来的dex，accept直接true即可
+            // 处理完后，混淆dex与原始dex合并。
+//            DexLib2Utils.mergerAndCoverDexFile(原始dex, 混淆后的dex, 输出)
+
 //             1.dex2jar
             new Dex2jarCmd(new ObfuscatorConfiguration() {
                 @Override
