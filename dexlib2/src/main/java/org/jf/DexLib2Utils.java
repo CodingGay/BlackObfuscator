@@ -48,10 +48,14 @@ public class DexLib2Utils {
 			DexBackedDexFile dexBackedDexFile = loadBackedDexFile(in.getAbsolutePath());
 			DexBuilder dexBuilder = new DexBuilder(Opcodes.getDefault());
 			Set<? extends DexBackedClassDef> defs = dexBackedDexFile.getClasses();
+
+			List<String> mateList = new ArrayList<>();
+
 			for (String sp : convertList) {
 				for (DexBackedClassDef def : defs) {
-					if (def.getType().contains(sp)) {
+					if (def.getType().contains(sp)&&!mateList.contains(def.getType())) {
 						Smali.assembleSmaliFile(classToSmali(def), dexBuilder, new SmaliOptions());
+						mateList.add(def.getType());
 					}
 				}
 			}

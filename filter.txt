@@ -1,0 +1,8 @@
+#it is annotation
+#cn.kaicity
+
+#package
+cn.kaicity.gk.cdk.BuildConfig
+
+#class
+cn.kaicity
