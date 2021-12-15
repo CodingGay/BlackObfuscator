@@ -16,18 +16,20 @@
  */
 package com.googlecode.dex2jar.tools;
 
+import com.android.dex.util.FileUtils;
 import com.googlecode.d2j.dex.Dex2jar;
-import com.googlecode.d2j.reader.BaseDexFileReader;
 import com.googlecode.d2j.reader.DexFileReader;
-import com.googlecode.d2j.reader.MultiDexFileReader;
 import com.googlecode.dex2jar.ir.ET;
 import org.jf.DexLib2Utils;
 import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 
 import java.io.File;
-import java.nio.file.Files;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @BaseCmd.Syntax(cmd = "d2j-black-obfuscator", syntax = "[options] <file0> [file1 ... fileN]", desc = "convert dex to jar")
 public class BlackObfuscatorCmd extends BaseCmd {
@@ -36,24 +38,25 @@ public class BlackObfuscatorCmd extends BaseCmd {
         new BlackObfuscatorCmd().doMain(args);
     }
 
-    @Opt(opt = "d", longOpt = "depth", description = "混淆深度")
+    @Opt(opt = "d", longOpt = "depth", description = "Obfuscator Depth")
     private int depth;
 
-    @Opt(opt = "i", longOpt = "input", description = "源Dex地址")
+    @Opt(opt = "i", longOpt = "input", description = "Origin Dex File")
     private Path input;
 
-    @Opt(opt = "o", longOpt = "output", description = "混淆生成的Dex保存的位置")
+    @Opt(opt = "o", longOpt = "output", description = "Target Dex Path")
     private Path output;
 
-    @Opt(opt = "p", longOpt = "package", description = "要处理的包名,简单过滤")
+    @Opt(opt = "p", longOpt = "package", description = "Package Name,Simple Filter")
     private String pkg;
 
-//    todo
-//    @Opt(opt = "a",longOpt = "allow",description = "要处理的类以及方法的txt文件")
-//    private Path allowList;
-//
-//    @Opt(opt = "d",longOpt = "disallow",description = "不处理的类以及方法的txt文件")
-//    private Path disallowList;
+    @Opt(opt = "f", longOpt = "allow", description = "Allow List File Path")
+    private Path allowList;
+
+    /**
+     * whileList
+     */
+    private final List<String> whileList = new ArrayList<>();
 
     public BlackObfuscatorCmd() {
     }
@@ -62,6 +65,9 @@ public class BlackObfuscatorCmd extends BaseCmd {
     protected void doCommandLine() throws Exception {
 
         try {
+            checkFilter();
+            checkInput();
+
             input = input.toAbsolutePath();
 
             if (output == null) {
@@ -70,15 +76,13 @@ public class BlackObfuscatorCmd extends BaseCmd {
 
             output = output.toAbsolutePath();
 
-            Path tempJar = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.jar");
-            Path tempDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.dex");
+            File tempJar = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.jar").toFile();
+            File splitDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "split.dex").toFile();
+            File obfDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.dex").toFile();
+            File mergeDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "merge.dex").toFile();
 
-
-            // 先分离用户的白名单
-//            DexLib2Utils.splitDex(in, out, whileList);
-            // 处理分离出来的dex，accept直接true即可
-            // 处理完后，混淆dex与原始dex合并。
-//            DexLib2Utils.mergerAndCoverDexFile(原始dex, 混淆后的dex, 输出)
+//            先分离用户的白名单
+            DexLib2Utils.splitDex(input.toFile(), splitDex, whileList);
 
 //             1.dex2jar
             new Dex2jarCmd(new ObfuscatorConfiguration() {
@@ -87,22 +91,23 @@ public class BlackObfuscatorCmd extends BaseCmd {
                     return depth;
                 }
 
-                @Override
-                protected boolean accept(String className, String methodName) {
-                    return className.startsWith(pkg);
-                }
-
-            }).doMain("-f", input.toString(), "-o", tempJar.toString());
+            }).doMain("-f", splitDex.getPath(), "-o", tempJar.toString());
 
 //             2.jar2dex
-            new Jar2Dex().doMain("-f", "-o", tempDex.toString(), tempJar.toString());
+            new Jar2Dex().doMain("-f", "-o", obfDex.toString(), tempJar.toString());
+
+
+            // 处理分离出来的dex，accept直接true即可
+            // 处理完后，混淆dex与原始dex合并。
+            DexLib2Utils.mergerAndCoverDexFile(input.toFile(), obfDex, mergeDex);
 //             3.fix dex
-            DexLib2Utils.saveDex(new File(tempDex.toString()),
-                    new File(output.toString()));
+            DexLib2Utils.saveDex(mergeDex, output.toFile());
 
 //             4.delete tmp file
-            tempJar.toFile().delete();
-            tempDex.toFile().delete();
+            tempJar.delete();
+            splitDex.delete();
+            obfDex.delete();
+            mergeDex.delete();
 
         } catch (Throwable t) {
             t.printStackTrace();
@@ -115,5 +120,57 @@ public class BlackObfuscatorCmd extends BaseCmd {
         return "BlackObfuscatorCmd-" + DexFileReader.class.getPackage().getImplementationVersion() + ", translator-"
                 + Dex2jar.class.getPackage().getImplementationVersion() + ", ir-"
                 + ET.class.getPackage().getImplementationVersion();
+    }
+
+    /**
+     * check filter params
+     *
+     * @throws IOException input too many params
+     */
+    private void checkFilter() throws IOException {
+        int level = 0;
+
+        if (pkg != null) {
+            whileList.add(pkg);
+            level++;
+        }
+
+        if (allowList != null) {
+            dealAllowList();
+            level++;
+        }
+
+        if (level > 1) {
+            throw new IOException("-p and -f Can't be at the same time");
+        }
+    }
+
+    /**
+     * check origin dex exists
+     *
+     * @throws IOException dex no exists
+     */
+    private void checkInput() throws IOException {
+        if (!input.toFile().exists()) {
+            throw new IOException("Origin Dex not exists");
+        }
+    }
+
+
+    private void dealAllowList() {
+        if (!allowList.toFile().exists()) {
+            System.out.println("Allow Rule File Not Exists");
+            return;
+        }
+
+        String allowRule = new String(FileUtils.readFile(allowList.toFile()));
+
+        for (String rule : allowRule.split("\n")) {
+            rule = rule.trim();
+            if (rule.startsWith("#")||rule.isEmpty()) {
+                continue;
+            }
+            whileList.add(rule);
+        }
     }
 }
