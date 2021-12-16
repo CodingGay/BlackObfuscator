@@ -66,7 +66,6 @@ public class BlackObfuscatorCmd extends BaseCmd {
         File tempJar = null;
         File splitDex = null;
         File obfDex = null;
-        File mergeDex = null;
         try {
             checkFilter();
             checkInput();
@@ -82,13 +81,11 @@ public class BlackObfuscatorCmd extends BaseCmd {
             tempJar = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.jar").toFile();
             splitDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "split.dex").toFile();
             obfDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.dex").toFile();
-            mergeDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "merge.dex").toFile();
 
             File finalTempJar = tempJar;
             File finalSplitDex = splitDex;
             File finalObfDex = obfDex;
-            File finalMergeDex = mergeDex;
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> deleteFile(finalTempJar, finalSplitDex, finalObfDex, finalMergeDex)));
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> deleteFile(finalTempJar, finalSplitDex, finalObfDex)));
 
             long l = DexLib2Utils.splitDex(input.toFile(), splitDex, whileList);
             if (l <= 0) {
@@ -104,12 +101,12 @@ public class BlackObfuscatorCmd extends BaseCmd {
 
             }).doMain("-f", splitDex.getPath(), "-o", tempJar.toString());
             new Jar2Dex().doMain("-f", "-o", obfDex.toString(), tempJar.toString());
-            DexLib2Utils.mergerAndCoverDexFile(input.toFile(), obfDex, mergeDex);
-            DexLib2Utils.saveDex(mergeDex, output.toFile());
+            DexLib2Utils.mergerAndCoverDexFile(input.toFile(), obfDex, output.toFile());
+            System.out.println("BlackObfuscator Out =====> " + output.toString());
         } catch (Throwable t) {
             t.printStackTrace();
         } finally {
-            deleteFile(tempJar, splitDex, obfDex, mergeDex);
+            deleteFile(tempJar, splitDex, obfDex);
         }
     }
 
