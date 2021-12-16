@@ -35,10 +35,10 @@
 #it is annotation
 #cn.kaicity
 
-#package
+#class
 cn.kaicity.gk.cdk.BuildConfig
 
-#class
+#package
 cn.kaicity
 
 ```
