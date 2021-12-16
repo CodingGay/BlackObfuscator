@@ -83,7 +83,7 @@ public class IRObfuscator {
 		Map<Integer, Integer> mapping = generateMapping();
 		// add index
 		// int obfIndex = random;
-		Local obfIndex = Exprs.nLocal(ir.locals.size() * 2,"obf");
+		Local obfIndex = Exprs.nLocal((ir.locals.size() + 1) * 2,"obf");
 		obfIndex.valueType = "I";
 
 		LBlock startBlock = generateLBlock();
