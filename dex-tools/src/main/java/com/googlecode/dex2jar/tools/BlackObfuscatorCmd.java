@@ -84,7 +84,17 @@ public class BlackObfuscatorCmd extends BaseCmd {
             obfDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.dex").toFile();
             mergeDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "merge.dex").toFile();
 
-            DexLib2Utils.splitDex(input.toFile(), splitDex, whileList);
+            File finalTempJar = tempJar;
+            File finalSplitDex = splitDex;
+            File finalObfDex = obfDex;
+            File finalMergeDex = mergeDex;
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> deleteFile(finalTempJar, finalSplitDex, finalObfDex, finalMergeDex)));
+
+            long l = DexLib2Utils.splitDex(input.toFile(), splitDex, whileList);
+            if (l <= 0) {
+                System.out.println("No classes found");
+                return;
+            }
 
             new Dex2jarCmd(new ObfuscatorConfiguration() {
                 @Override

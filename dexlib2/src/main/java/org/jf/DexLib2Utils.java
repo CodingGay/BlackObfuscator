@@ -35,7 +35,7 @@ public class DexLib2Utils {
 		}
 	}
 
-	public static boolean splitDex(File in, File out, List<String> className) {
+	public static long splitDex(File in, File out, List<String> className) {
 		try {
 			List<String> convertList = new ArrayList<>();
 			for (String s : className) {
@@ -53,16 +53,17 @@ public class DexLib2Utils {
 
 			for (String sp : convertList) {
 				for (DexBackedClassDef def : defs) {
-					if (def.getType().contains(sp)&&!mateList.contains(def.getType())) {
+					if (def.getType().contains(sp) && !mateList.contains(def.getType())) {
 						Smali.assembleSmaliFile(classToSmali(def), dexBuilder, new SmaliOptions());
 						mateList.add(def.getType());
 					}
 				}
 			}
-			return saveDexFileDexLib2(dexBuilder, out.getAbsolutePath());
+
+			return saveDexFileDexLib2(dexBuilder, out.getAbsolutePath()) ? mateList.size() : 0;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
 	}
 
