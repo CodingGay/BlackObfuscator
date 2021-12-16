@@ -9,7 +9,39 @@
 - 目前是基础最简单的混淆版本，测试稳定性为主，后续将持续更新升级。
 
 ## 注意事项
-- 本项目基于dex2jar，为了出现转换过程中避免不必要的问题，请最好将需要混淆的类提取成一个单独的dex再进行混淆，避免各种三方库等转换。
+- 本项目基于dex2jar，为了出现转换过程中避免不必要的问题，请尽量混淆自己业务的代码，避免其余三方库一起混淆。
+
+## 如何使用
+### Main#main
+
+参数 | 解释
+---|---
+-d | 混淆深度，越高混淆越深
+-i | 输入dex
+-o | 输出dex
+-a | 规则文件，见下一步骤
+-p | 与规则文件相同，此处可便捷提供一个需要提供混淆的路径
+
+```java
+    BlackObfuscatorCmd.main("d2j-black-obfuscator",
+            "-d", "2",
+            "-i", "/Users/milk/Documents/classes.dex",
+            "-o", "/Users/milk/Documents/classes_out.dex",
+            "-a", "filter.txt");
+```
+### 混淆规则
+#### 提供需要混淆的类
+```x
+#it is annotation
+#cn.kaicity
+
+#package
+cn.kaicity.gk.cdk.BuildConfig
+
+#class
+cn.kaicity
+
+```
 
 ## 后续计划
 - 支持 android studio，打包自动化混淆
