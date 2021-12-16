@@ -8,6 +8,6 @@ public class Main {
                 "-d", "1",
                 "-i", "/Users/milk/Documents/classes.dex",
                 "-o", "/Users/milk/Documents/classes_out.dex",
-                "-f", "allow.txt");
+                "-f", "filter.txt");
     }
 }
