@@ -50,7 +50,7 @@ public class BlackObfuscatorCmd extends BaseCmd {
     @Opt(opt = "p", longOpt = "package", description = "Package Name,Simple Filter")
     private String pkg;
 
-    @Opt(opt = "f", longOpt = "allow", description = "Allow List File Path")
+    @Opt(opt = "a", longOpt = "allow", description = "Allow List File Path")
     private Path allowList;
 
     /**
@@ -63,7 +63,10 @@ public class BlackObfuscatorCmd extends BaseCmd {
 
     @Override
     protected void doCommandLine() throws Exception {
-
+        File tempJar = null;
+        File splitDex = null;
+        File obfDex = null;
+        File mergeDex = null;
         try {
             checkFilter();
             checkInput();
@@ -76,15 +79,13 @@ public class BlackObfuscatorCmd extends BaseCmd {
 
             output = output.toAbsolutePath();
 
-            File tempJar = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.jar").toFile();
-            File splitDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "split.dex").toFile();
-            File obfDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.dex").toFile();
-            File mergeDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "merge.dex").toFile();
+            tempJar = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.jar").toFile();
+            splitDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "split.dex").toFile();
+            obfDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "obf.dex").toFile();
+            mergeDex = Paths.get(output.getParent().toString(), System.currentTimeMillis() + "merge.dex").toFile();
 
-//            先分离用户的白名单
             DexLib2Utils.splitDex(input.toFile(), splitDex, whileList);
 
-//             1.dex2jar
             new Dex2jarCmd(new ObfuscatorConfiguration() {
                 @Override
                 protected int getObfDepth() {
@@ -92,26 +93,13 @@ public class BlackObfuscatorCmd extends BaseCmd {
                 }
 
             }).doMain("-f", splitDex.getPath(), "-o", tempJar.toString());
-
-//             2.jar2dex
             new Jar2Dex().doMain("-f", "-o", obfDex.toString(), tempJar.toString());
-
-
-            // 处理分离出来的dex，accept直接true即可
-            // 处理完后，混淆dex与原始dex合并。
             DexLib2Utils.mergerAndCoverDexFile(input.toFile(), obfDex, mergeDex);
-//             3.fix dex
             DexLib2Utils.saveDex(mergeDex, output.toFile());
-
-//             4.delete tmp file
-            tempJar.delete();
-            splitDex.delete();
-            obfDex.delete();
-            mergeDex.delete();
-
         } catch (Throwable t) {
             t.printStackTrace();
-            // todo
+        } finally {
+            deleteFile(tempJar, splitDex, obfDex, mergeDex);
         }
     }
 
@@ -141,7 +129,7 @@ public class BlackObfuscatorCmd extends BaseCmd {
         }
 
         if (level > 1) {
-            throw new IOException("-p and -f Can't be at the same time");
+            throw new IOException("-p and -a Can't be at the same time");
         }
     }
 
@@ -171,6 +159,14 @@ public class BlackObfuscatorCmd extends BaseCmd {
                 continue;
             }
             whileList.add(rule);
+        }
+    }
+
+    private void deleteFile(File... files) {
+        for (File file : files) {
+            if (file != null) {
+                file.delete();
+            }
         }
     }
 }
