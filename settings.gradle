@@ -3,4 +3,5 @@ include ':dex-reader-api', ':dex-reader', ':dex-writer', ':dex-translator', ':de
 include 'dexlib2'
 include 'dex-obfuscator'
 include 'main'
+include 'ams'
 

@@ -6,6 +6,7 @@ dependencies {
   }
 //  compile "org.ow2.asm:asm-debug-all:5.0.3"
   compile project(':d2j-base-cmd')
+  compile project(':ams')
   antlr "org.antlr:antlr:3.5.2"
 }
 
