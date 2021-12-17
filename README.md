@@ -26,7 +26,7 @@
 -i | 输入dex
 -o | 输出dex
 -a | 规则文件，见下一步骤
--p | 与规则文件相同，此处可便捷提供一个需要提供混淆的路径
+-p | 需要进行混淆的包名
 
 ```java
     BlackObfuscatorCmd.main("d2j-black-obfuscator",
