@@ -18,7 +18,7 @@ package org.objectweb.asm;
 
 import org.objectweb.asm.tree.MethodNode;
 
-public class AsmBridge {
+public class AsmBridgeFix {
     public static MethodVisitor searchMethodWriter(MethodVisitor mv) {
         while (mv != null && !(mv instanceof MethodWriter)) {
             mv = mv.mv;
