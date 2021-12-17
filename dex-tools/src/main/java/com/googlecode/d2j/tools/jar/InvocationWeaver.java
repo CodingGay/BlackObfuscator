@@ -17,13 +17,13 @@
 package com.googlecode.d2j.tools.jar;
 
 import com.googlecode.dex2jar.tools.BaseCmd;
-import org.objectweb.asm.*;
-import org.objectweb.asm.commons.Remapper;
-import org.objectweb.asm.commons.RemappingClassAdapter;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.LocalVariableNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.TryCatchBlockNode;
+import org.objectweb.asm2.*;
+import org.objectweb.asm2.commons.Remapper;
+import org.objectweb.asm2.commons.RemappingClassAdapter;
+import org.objectweb.asm2.tree.InsnList;
+import org.objectweb.asm2.tree.LocalVariableNode;
+import org.objectweb.asm2.tree.MethodNode;
+import org.objectweb.asm2.tree.TryCatchBlockNode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

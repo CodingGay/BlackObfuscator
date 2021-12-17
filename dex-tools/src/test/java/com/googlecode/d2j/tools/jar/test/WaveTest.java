@@ -7,10 +7,10 @@ import com.googlecode.d2j.tools.jar.InvocationWeaver;
 import org.antlr.runtime.RecognitionException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm2.ClassReader;
+import org.objectweb.asm2.ClassWriter;
+import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm2.tree.ClassNode;
 
 import java.io.IOException;
 import java.io.PrintWriter;

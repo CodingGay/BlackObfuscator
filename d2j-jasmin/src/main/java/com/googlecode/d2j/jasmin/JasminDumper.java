@@ -29,12 +29,12 @@
  */
 package com.googlecode.d2j.jasmin;
 
-import org.objectweb.asm.Label;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
-import org.objectweb.asm.tree.*;
-import org.objectweb.asm.util.Printer;
+import org.objectweb.asm2.Label;
+import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm2.Type;
+import org.objectweb.asm2.tree.*;
+import org.objectweb.asm2.util.Printer;
 
 import java.io.PrintWriter;
 import java.util.*;

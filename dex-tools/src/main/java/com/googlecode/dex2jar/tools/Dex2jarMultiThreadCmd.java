@@ -28,17 +28,17 @@ import java.util.concurrent.*;
 import com.googlecode.d2j.dex.LambadaNameSafeClassAdapter;
 import com.googlecode.d2j.reader.BaseDexFileReader;
 import com.googlecode.d2j.reader.MultiDexFileReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm2.ClassVisitor;
+import org.objectweb.asm2.ClassWriter;
+import org.objectweb.asm2.Opcodes;
 
 import com.googlecode.d2j.dex.ClassVisitorFactory;
 import com.googlecode.d2j.dex.ExDex2Asm;
 import com.googlecode.d2j.node.DexClassNode;
 import com.googlecode.d2j.node.DexFileNode;
 import com.googlecode.d2j.reader.DexFileReader;
-import org.objectweb.asm.commons.Remapper;
-import org.objectweb.asm.commons.RemappingClassAdapter;
+import org.objectweb.asm2.commons.Remapper;
+import org.objectweb.asm2.commons.RemappingClassAdapter;
 
 @BaseCmd.Syntax(cmd = "d2j-mt-dex2jar", syntax = "[options] <file0> [file1 ... fileN]", desc = "convert dex to jar")
 public class Dex2jarMultiThreadCmd extends BaseCmd {

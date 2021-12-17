@@ -16,7 +16,7 @@
  */
 package com.googlecode.d2j.tools.jar;
 
-import org.objectweb.asm.Type;
+import org.objectweb.asm2.Type;
 
 import java.io.BufferedReader;
 import java.io.IOException;

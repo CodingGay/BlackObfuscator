@@ -1,9 +1,9 @@
 package com.googlecode.d2j.tools.jar;
 
 import com.googlecode.d2j.tools.jar.ClassInfo.MemberInfo;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm2.ClassVisitor;
+import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm2.Opcodes;
 
 import java.util.Collections;
 import java.util.HashMap;

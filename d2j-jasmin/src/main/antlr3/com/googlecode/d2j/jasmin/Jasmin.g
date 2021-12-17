@@ -5,9 +5,9 @@ package com.googlecode.d2j.jasmin;
 import java.util.List;
 import java.util.ArrayList;
 import java.math.BigInteger;
-import org.objectweb.asm.*;
-import org.objectweb.asm.tree.*;
-import static org.objectweb.asm.Opcodes.*;
+import org.objectweb.asm2.*;
+import org.objectweb.asm2.tree.*;
+import static org.objectweb.asm2.Opcodes.*;
 }
 @lexer::header {
 package com.googlecode.d2j.jasmin;

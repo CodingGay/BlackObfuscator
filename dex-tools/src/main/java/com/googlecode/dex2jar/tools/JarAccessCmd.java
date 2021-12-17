@@ -22,7 +22,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.objectweb.asm.*;
+import org.objectweb.asm2.*;
 
 @BaseCmd.Syntax(cmd = "d2j-jar-access", syntax = "[options] <jar>", desc = "add or remove class/method/field access in jar file")
 public class JarAccessCmd extends BaseCmd implements Opcodes {

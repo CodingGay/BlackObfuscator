@@ -11,5 +11,5 @@ repositories {
 
 dependencies {
     compile project(':dex-ir')
-    compile 'org.ow2.asm:asm-debug-all:5.0.3'
+//    compile 'org.ow2.asm:asm-debug-all:5.0.3'
 }

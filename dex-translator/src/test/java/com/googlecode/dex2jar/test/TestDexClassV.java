@@ -2,8 +2,8 @@ package com.googlecode.dex2jar.test;
 
 import com.googlecode.d2j.node.DexMethodNode;
 import org.junit.Ignore;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm2.ClassWriter;
+import org.objectweb.asm2.Opcodes;
 
 import com.googlecode.d2j.Method;
 import com.googlecode.d2j.visitors.DexClassVisitor;

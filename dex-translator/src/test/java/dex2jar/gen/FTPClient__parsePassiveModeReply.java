@@ -10,7 +10,7 @@ import com.googlecode.dex2jar.test.DexTranslatorRunner;
 import com.googlecode.dex2jar.test.TestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm2.Opcodes;
 
 import static com.googlecode.d2j.reader.Op.*;
 @RunWith(DexTranslatorRunner.class)

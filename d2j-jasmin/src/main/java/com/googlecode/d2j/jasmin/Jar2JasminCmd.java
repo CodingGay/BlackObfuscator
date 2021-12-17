@@ -18,8 +18,8 @@ package com.googlecode.d2j.jasmin;
 
 import com.googlecode.dex2jar.tools.BaseCmd;
 import com.googlecode.dex2jar.tools.BaseCmd.Syntax;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm2.ClassReader;
+import org.objectweb.asm2.tree.ClassNode;
 
 import java.io.*;
 import java.net.URISyntaxException;

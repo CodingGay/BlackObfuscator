@@ -25,11 +25,11 @@ import com.googlecode.dex2jar.ir.expr.*;
 import com.googlecode.dex2jar.ir.ts.*;
 import com.googlecode.dex2jar.ir.ts.array.FillArrayTransformer;
 import com.googlecode.dex2jar.tools.BaseCmd.Syntax;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm2.ClassReader;
+import org.objectweb.asm2.ClassWriter;
+import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm2.Type;
+import org.objectweb.asm2.tree.*;
 
 import java.io.File;
 import java.io.IOException;

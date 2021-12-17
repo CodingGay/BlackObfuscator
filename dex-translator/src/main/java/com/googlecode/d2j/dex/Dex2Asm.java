@@ -7,10 +7,10 @@ import com.googlecode.d2j.node.*;
 import com.googlecode.dex2jar.ir.IrMethod;
 import com.googlecode.dex2jar.ir.ts.*;
 import com.googlecode.dex2jar.ir.ts.array.FillArrayTransformer;
-import org.objectweb.asm.*;
-import org.objectweb.asm.signature.SignatureReader;
-import org.objectweb.asm.signature.SignatureWriter;
-import org.objectweb.asm.tree.InnerClassNode;
+import org.objectweb.asm2.*;
+import org.objectweb.asm2.signature.SignatureReader;
+import org.objectweb.asm2.signature.SignatureWriter;
+import org.objectweb.asm2.tree.InnerClassNode;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -563,7 +563,7 @@ public class Dex2Asm {
     }
 
     /**
-     * @see org.objectweb.asm.commons.Remapper#mapSignature(String, boolean)
+     * @see org.objectweb.asm2.commons.Remapper#mapSignature(String, boolean)
      */
     private static boolean isSignatureNotValid(String signature, boolean typeSignature) {
         if (signature == null) {

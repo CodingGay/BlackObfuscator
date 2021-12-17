@@ -24,7 +24,7 @@ import com.googlecode.d2j.reader.DexFileReader;
 import com.googlecode.d2j.smali.BaksmaliDumper;
 import com.googlecode.d2j.smali.Smali;
 import com.googlecode.dex2jar.ir.ET;
-import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm2.MethodVisitor;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

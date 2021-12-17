@@ -1,6 +1,6 @@
 package com.googlecode.d2j.dex;
 
-import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm2.ClassVisitor;
 
 public interface ClassVisitorFactory {
 

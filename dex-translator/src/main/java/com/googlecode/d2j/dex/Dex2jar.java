@@ -29,10 +29,10 @@ import java.util.Map;
 
 import com.googlecode.d2j.node.DexMethodNode;
 import com.googlecode.d2j.reader.BaseDexFileReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm2.ClassVisitor;
+import org.objectweb.asm2.ClassWriter;
+import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm2.Opcodes;
 
 import com.googlecode.d2j.converter.IR2JConverter;
 import com.googlecode.d2j.node.DexFileNode;
@@ -41,8 +41,8 @@ import com.googlecode.d2j.reader.zip.ZipUtil;
 import com.googlecode.dex2jar.ir.IrMethod;
 import com.googlecode.dex2jar.ir.stmt.LabelStmt;
 import com.googlecode.dex2jar.ir.stmt.Stmt;
-import org.objectweb.asm.commons.Remapper;
-import org.objectweb.asm.commons.RemappingClassAdapter;
+import org.objectweb.asm2.commons.Remapper;
+import org.objectweb.asm2.commons.RemappingClassAdapter;
 import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 
 public class Dex2jar {

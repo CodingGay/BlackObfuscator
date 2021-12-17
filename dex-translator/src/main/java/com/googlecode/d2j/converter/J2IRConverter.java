@@ -5,19 +5,19 @@ import com.googlecode.dex2jar.ir.Trap;
 import com.googlecode.dex2jar.ir.expr.Exprs;
 import com.googlecode.dex2jar.ir.expr.Local;
 import com.googlecode.dex2jar.ir.stmt.*;
-import org.objectweb.asm.Handle;
-import org.objectweb.asm.Label;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
-import org.objectweb.asm.tree.*;
-import org.objectweb.asm.tree.analysis.AnalyzerException;
-import org.objectweb.asm.tree.analysis.Frame;
-import org.objectweb.asm.tree.analysis.Interpreter;
-import org.objectweb.asm.tree.analysis.Value;
+import org.objectweb.asm2.Handle;
+import org.objectweb.asm2.Label;
+import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm2.Type;
+import org.objectweb.asm2.tree.*;
+import org.objectweb.asm2.tree.analysis.AnalyzerException;
+import org.objectweb.asm2.tree.analysis.Frame;
+import org.objectweb.asm2.tree.analysis.Interpreter;
+import org.objectweb.asm2.tree.analysis.Value;
 
 import java.util.*;
 
-import static org.objectweb.asm.Opcodes.*;
+import static org.objectweb.asm2.Opcodes.*;
 
 public class J2IRConverter {
     Map<Label, LabelStmt> map = new HashMap<>();

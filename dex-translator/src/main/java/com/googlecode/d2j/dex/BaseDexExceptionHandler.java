@@ -18,8 +18,8 @@ package com.googlecode.d2j.dex;
 
 import com.googlecode.d2j.Method;
 import com.googlecode.d2j.node.DexMethodNode;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm2.Opcodes;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

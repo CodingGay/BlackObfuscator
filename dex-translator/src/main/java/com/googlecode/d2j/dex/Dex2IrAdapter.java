@@ -65,7 +65,7 @@ import com.googlecode.d2j.node.insn.DexStmtNode;
 import com.googlecode.d2j.node.insn.MethodStmtNode;
 import com.googlecode.d2j.visitors.DexDebugVisitor;
 import com.googlecode.dex2jar.ir.TypeClass;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm2.Opcodes;
 
 import com.googlecode.d2j.DexLabel;
 import com.googlecode.d2j.DexConstants;

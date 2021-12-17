@@ -16,10 +16,10 @@
  */
 package com.googlecode.d2j.dex;
 
-import org.objectweb.asm.AsmBridge;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm2.AsmBridge;
+import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm2.tree.MethodNode;
 
 import com.googlecode.d2j.DexException;
 import com.googlecode.d2j.node.DexMethodNode;

@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.objectweb.asm;
+package org.objectweb.asm2;
 
-import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm2.tree.MethodNode;
 
 public class AsmBridge {
     public static MethodVisitor searchMethodWriter(MethodVisitor mv) {

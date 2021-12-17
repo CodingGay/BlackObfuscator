@@ -1,6 +1,6 @@
 package com.googlecode.d2j.util;
 
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm2.Opcodes;
 
 public class AccUtils {
     public static boolean isBridge(int acc) {
