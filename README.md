@@ -1,5 +1,7 @@
 # DEX控制流混淆 · BlackObfuscator
 
+**[English Version](README_EN.md)**
+
 ![](https://img.shields.io/badge/language-java-brightgreen.svg)
 
 本项目针对Android APK  DEX控制流混淆，在不会改变应用原有逻辑的前提下，会将原始代码进行控制流混淆，使得代码难以阅读，增加反编译阅读的难度以达到保护应用。
