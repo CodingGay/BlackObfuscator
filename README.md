@@ -12,6 +12,9 @@
 ## 注意事项
 - 本项目基于dex2jar，为了出现转换过程中避免不必要的问题，请尽量混淆自己业务的代码，避免其余三方库一起混淆，在混淆规则内提供自己的业务代码路径。
 
+## Android Studio插件支持
+目前本项目已集成Android Studio插件，支持打包自动化混淆。详情请移至：[BlackObfuscator-ASPlugin](https://github.com/CodingGay/BlackObfuscator-ASPlugin)
+
 ## 如何使用
 ### Main#main
 
@@ -45,7 +48,6 @@ cn.kaicity
 ```
 
 ## 后续计划
-- 支持 android studio，打包自动化混淆
 - 更高强度的混淆
 - 开发GUI
 
