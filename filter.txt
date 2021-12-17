@@ -6,4 +6,3 @@ cn.kaicity.gk.cdk.BuildConfig
 
 #package
 cn.kaicity
-a.
