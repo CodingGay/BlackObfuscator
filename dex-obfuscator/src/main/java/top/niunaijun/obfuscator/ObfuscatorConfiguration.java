@@ -14,7 +14,6 @@ public abstract class ObfuscatorConfiguration {
 	 * @param className className
 	 * @param methodName methodName
 	 */
-	@Deprecated
 	protected boolean accept(String className, String methodName){
 		return true;
 	}
