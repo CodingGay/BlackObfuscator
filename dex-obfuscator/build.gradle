@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(':dex-ir')
-    implementation project(':ams')
+    compile project(':dex-ir')
+    compile project(':ams')
 //    compile 'org.ow2.asm:asm-debug-all:5.0.3'
 }

@@ -1,6 +1,6 @@
 description = 'Dex Translator'
 
 dependencies {
-  implementation project(':dex-reader-api')
+  compile project(':dex-reader-api')
 }
 

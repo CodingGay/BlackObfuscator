@@ -4,18 +4,13 @@ apply plugin:'application'
 mainClassName="com.googlecode.dex2jar.tools.BaseCmd"
 
 dependencies {
-    implementation project(':dex-translator')
-    implementation project(':d2j-smali')
-    implementation project(':d2j-jasmin')
-    implementation project(':dex-writer')
-    implementation project(':dex-obfuscator')
-    implementation project(':d2j-base-cmd')
-    implementation project(':dexlib2')
-    implementation project(':dex-reader')
-    implementation project(':dex-reader-api')
-    implementation project(':dex-ir')
-    implementation project(':d2j-base-cmd')
-    implementation project(':ams')
+  compile project(':dex-translator')
+  compile project(':d2j-smali')
+  compile project(':d2j-jasmin')
+  compile project(':dex-writer')
+  compile project(':dex-obfuscator')
+  compile project(':d2j-base-cmd')
+  compile project(':dexlib2')
 }
 
 task bin_gen(type: JavaExec) {
