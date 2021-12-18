@@ -2,9 +2,6 @@ plugins {
     id 'java'
 }
 
-group 'com.googlecode.d2j'
-version '2.2-SNAPSHOT'
-
 repositories {
     mavenCentral()
 }
