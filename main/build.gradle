@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':dex-tools')
+    implementation project(':dex-tools')
 }
 
 test {

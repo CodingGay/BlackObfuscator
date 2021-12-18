@@ -7,9 +7,9 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'com.google.guava:guava:18.0'
-    compile(group: 'org.antlr', name: 'antlr-runtime', version:'3.5.2') {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    implementation 'com.google.guava:guava:18.0'
+    implementation(group: 'org.antlr', name: 'antlr-runtime', version:'3.5.2') {
         exclude(module: 'stringtemplate')
     }
 }
