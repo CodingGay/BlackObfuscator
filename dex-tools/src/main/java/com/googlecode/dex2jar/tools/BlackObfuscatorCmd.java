@@ -67,6 +67,14 @@ public class BlackObfuscatorCmd extends BaseCmd {
         File splitDex = null;
         File obfDex = null;
         try {
+            if (remainingArgs.length == 0) {
+                usage();
+                return;
+            }
+            if (input == null) {
+                usage();
+                return;
+            }
             checkFilter();
             checkInput();
 
