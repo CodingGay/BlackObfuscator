@@ -135,17 +135,24 @@ public class IRObfuscator {
 
 		LBlock defaultTarget = generateLBlock();
 
-		Map<Integer, LabelStmt> switchBlock = new HashMap<>();
+		Map<Integer, LabelStmt> switchBlock = new LinkedHashMap<>();
+		Map<Integer, LabelStmt> newSwitchBlock = new LinkedHashMap<>();
 		switchBlock.put(mapping.get(MAPPING_GOTO).hashCode() ^ obfIndexI, targetBlock.getLabelStmt());
 		switchBlock.put(mapping.get(MAPPING_ELSE).hashCode() ^ obfIndexI, elseBlock.getLabelStmt());
 		switchBlock.put(mapping.get(MAPPING_ENTER).hashCode() ^ obfIndexI, enterBlock.getLabelStmt());
 		switchBlock.put(mapping.get(MAPPING_NEXT).hashCode() ^ obfIndexI, nextBlock.getLabelStmt());
 		switchBlock.put(mapping.get(MAPPING_FAKE).hashCode() ^ obfIndexI, fake.getLabelStmt());
+		List<Integer> sortList = new ArrayList<>(switchBlock.keySet());
+		Collections.shuffle(sortList);
+		for (Integer integer : sortList) {
+			newSwitchBlock.put(integer, switchBlock.get(integer));
+		}
+
 
 		// switch(obfIndex)
 		LookupSwitchStmt lookupSwitchStmt = Stmts.nLookupSwitch(obfIndex,
-				switchBlock.keySet().stream().mapToInt(integer -> integer).toArray(),
-				switchBlock.values().toArray(new LabelStmt[]{}),
+				newSwitchBlock.keySet().stream().mapToInt(integer -> integer).toArray(),
+				newSwitchBlock.values().toArray(new LabelStmt[]{}),
 				defaultTarget.getLabelStmt());
 
 		newStmts.add(lookupSwitchStmt);
