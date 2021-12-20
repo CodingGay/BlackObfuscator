@@ -75,6 +75,8 @@ public final class Exprs {
     }
 
     public static Constant nString(String i) {
+        Constant constant = new Constant(i);
+        constant.valueType = "Ljava/lang/String;";
         return new Constant(i);
     }
 

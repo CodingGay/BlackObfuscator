@@ -3,7 +3,9 @@ package top.niunaijun.obfuscator;
 import com.googlecode.dex2jar.ir.IrMethod;
 import com.googlecode.dex2jar.ir.Trap;
 import com.googlecode.dex2jar.ir.expr.Exprs;
+import com.googlecode.dex2jar.ir.expr.InvokeExpr;
 import com.googlecode.dex2jar.ir.expr.Local;
+import com.googlecode.dex2jar.ir.expr.Value;
 import com.googlecode.dex2jar.ir.stmt.*;
 
 import java.util.*;
@@ -70,31 +72,44 @@ public class IRObfuscator {
 	private RebuildIfResult reBuildIf(IrMethod ir, IfStmt ifStmt, List<Stmt> origStmts) {
 		List<Stmt> newStmts = new ArrayList<>();
 
-		int maxLocalIndex = 0;
-		for (Local local : ir.locals) {
-			maxLocalIndex = Math.max(maxLocalIndex, local._ls_index);
-		}
-
 		// if goto
 		LBlock targetBlock = getIfTargetStmts(ifStmt);
 
 		LBlock elseBlock = generateLBlock();
 
-		Map<Integer, Integer> mapping = generateMapping();
-		// add index
-		// int obfIndex = random;
-		Local obfIndex = Exprs.nLocal((ir.locals.size() + 1) * 2,"obf");
+		Map<Integer, String> mapping = generateObfLocalMapping();
+
+		int localSize = ir.locals.size() * 2;
+		Local obfIndexFinal = Exprs.nLocal(++localSize,"obf_index_final");
+		obfIndexFinal.valueType = "I";
+		ir.locals.add(obfIndexFinal);
+
+		Local obfIndex = Exprs.nLocal(++localSize,"obf_index");
 		obfIndex.valueType = "I";
+		ir.locals.add(obfIndex);
+
+		Local obfStrHash = Exprs.nLocal(++localSize,"obf_hash");
+		obfStrHash.valueType = "I";
+		ir.locals.add(obfStrHash);
+
+		Local obfStr = Exprs.nLocal(++localSize,"obf_str");
+		obfStr.valueType = "Ljava/lang/String;";
+		ir.locals.add(obfStr);
 
 		LBlock startBlock = generateLBlock();
-		int obfIndexI = mapping.get(MAPPING_INDEX);
+		int obfIndexI = mapping.get(MAPPING_INDEX).hashCode();
 		newStmts.add(startBlock.getLabelStmt());
-		newStmts.add(Stmts.nAssign(obfIndex, Exprs.nInt(obfIndexI ^ mapping.get(MAPPING_ENTER))));
+
+		// int obf_index_final = 1;
+		newStmts.add(Stmts.nAssign(obfIndexFinal, Exprs.nInt(obfIndexI)));
+
+		newStmts.add(Stmts.nAssign(obfStr, Exprs.nString(mapping.get(MAPPING_ENTER))));
 
 		LabelStmt whileBegin = createWhile(newStmts);
 
 		// 创建 ^ 操作
-		newStmts.add(Stmts.nAssign(obfIndex, Exprs.nXor(obfIndex, Exprs.nInt(obfIndexI), "I")));
+		newStmts.add(Stmts.nAssign(obfStrHash, hashInvoke(obfStr)));
+		newStmts.add(Stmts.nAssign(obfIndex, Exprs.nXor(obfIndexFinal, obfStrHash, "I")));
 
 		LBlock fake = generateLBlock();
 		fake.getStmts().add(Stmts.nAssign(obfIndex, obfIndex));
@@ -103,17 +118,17 @@ public class IRObfuscator {
 		// goto的跳板，由于没办法直接回到whileBegin并且计算obfIndex，所以需要此跳板来来操作.
 		// 跳板将跳转回原goto
 		LBlock gotoJumpBlock = generateLBlock();
-		gotoJumpBlock.getStmts().add(Stmts.nAssign(obfIndex, Exprs.nInt(obfIndexI ^ mapping.get(MAPPING_GOTO))));
+		gotoJumpBlock.getStmts().add(Stmts.nAssign(obfStr, Exprs.nString(mapping.get(MAPPING_GOTO))));
 		gotoJumpBlock.getStmts().add(Stmts.nGoto(whileBegin));
 
 		LBlock enterBlock = generateLBlock();
 		ifStmt.target = gotoJumpBlock.getLabelStmt();
 		enterBlock.getStmts().add(ifStmt);
-		enterBlock.getStmts().add(Stmts.nAssign(obfIndex, Exprs.nInt(obfIndexI ^ mapping.get(MAPPING_ELSE))));
+		enterBlock.getStmts().add(Stmts.nAssign(obfStr, Exprs.nString(mapping.get(MAPPING_ELSE))));
 		enterBlock.getStmts().add(Stmts.nGoto(whileBegin));
 
 		// else块需要重跳回whileBegin，进行最后跳跃到nextStep
-		elseBlock.getStmts().add(Stmts.nAssign(obfIndex, Exprs.nInt(obfIndexI ^ mapping.get(MAPPING_NEXT))));
+		elseBlock.getStmts().add(Stmts.nAssign(obfStr, Exprs.nString(mapping.get(MAPPING_NEXT))));
 		elseBlock.getStmts().add(Stmts.nGoto(whileBegin));
 
 		LBlock nextBlock = generateLBlock();
@@ -121,11 +136,11 @@ public class IRObfuscator {
 		LBlock defaultTarget = generateLBlock();
 
 		Map<Integer, LabelStmt> switchBlock = new HashMap<>();
-		switchBlock.put(mapping.get(MAPPING_GOTO), targetBlock.getLabelStmt());
-		switchBlock.put(mapping.get(MAPPING_ELSE), elseBlock.getLabelStmt());
-		switchBlock.put(mapping.get(MAPPING_ENTER), enterBlock.getLabelStmt());
-		switchBlock.put(mapping.get(MAPPING_NEXT), nextBlock.getLabelStmt());
-		switchBlock.put(mapping.get(MAPPING_FAKE), fake.getLabelStmt());
+		switchBlock.put(mapping.get(MAPPING_GOTO).hashCode() ^ obfIndexI, targetBlock.getLabelStmt());
+		switchBlock.put(mapping.get(MAPPING_ELSE).hashCode() ^ obfIndexI, elseBlock.getLabelStmt());
+		switchBlock.put(mapping.get(MAPPING_ENTER).hashCode() ^ obfIndexI, enterBlock.getLabelStmt());
+		switchBlock.put(mapping.get(MAPPING_NEXT).hashCode() ^ obfIndexI, nextBlock.getLabelStmt());
+		switchBlock.put(mapping.get(MAPPING_FAKE).hashCode() ^ obfIndexI, fake.getLabelStmt());
 
 		// switch(obfIndex)
 		LookupSwitchStmt lookupSwitchStmt = Stmts.nLookupSwitch(obfIndex,
@@ -168,24 +183,23 @@ public class IRObfuscator {
 		return new LBlock();
 	}
 
-	private int random() {
-		return new Random().nextInt(999999) + 100000;
+	private InvokeExpr hashInvoke(Local strLocal) {
+		return Exprs.nInvokeVirtual(new Value[]{strLocal}, "Ljava/lang/String;","hashCode", new String[]{}, "I");
 	}
 
-	private Map<Integer, Integer> generateMapping() {
-		Map<Integer, Integer> mapping = new HashMap<>();
-		int index = random();
-		mapping.put(MAPPING_INDEX, index);
-		mapping.put(MAPPING_GOTO, random());
-		mapping.put(MAPPING_ELSE, random());
-		mapping.put(MAPPING_ENTER, random());
-		mapping.put(MAPPING_NEXT, random());
-		mapping.put(MAPPING_FAKE, random());
+	private Map<Integer, String> generateObfLocalMapping() {
+		Map<Integer, String> mapping = new HashMap<>();
+		mapping.put(MAPPING_INDEX, randomString());
+		mapping.put(MAPPING_GOTO, randomString());
+		mapping.put(MAPPING_ELSE, randomString());
+		mapping.put(MAPPING_ENTER, randomString());
+		mapping.put(MAPPING_NEXT, randomString());
+		mapping.put(MAPPING_FAKE, randomString());
 
-		Set<Integer> set = new HashSet<>();
-		for (Integer value : mapping.values()) {
+		Set<String> set = new HashSet<>();
+		for (String value : mapping.values()) {
 			if (set.contains(value)) {
-				return generateMapping();
+				return generateObfLocalMapping();
 			} else {
 				set.add(value);
 			}
@@ -216,5 +230,14 @@ public class IRObfuscator {
 			}
 		}
 		return null;
+	}
+
+	private String randomString() {
+		int length = new Random().nextInt(5);
+		StringBuilder stringBuilder = new StringBuilder();
+		for (int i = 0; i < length; i++) {
+			stringBuilder.append(ObfDic.dic[new Random().nextInt(ObfDic.dic.length - 1)]);
+		}
+		return stringBuilder.toString();
 	}
 }
