@@ -55,7 +55,7 @@ public class IRObfuscator {
 			for (Stmt stmt : ir.stmts) {
 				switch (stmt.st) {
 					case IF:
-						rebuildIfResult = reBuildIf(ir, (IfStmt) stmt, origStmts);
+						rebuildIfResult = reBuildIf(ir, (IfStmt) stmt, origStmts, configuration.getObfDepth());
 						newStmts.addAll(rebuildIfResult.getResult());
 						break;
 					default:
@@ -69,7 +69,7 @@ public class IRObfuscator {
 		}
 	}
 
-	private RebuildIfResult reBuildIf(IrMethod ir, IfStmt ifStmt, List<Stmt> origStmts) {
+	private RebuildIfResult reBuildIf(IrMethod ir, IfStmt ifStmt, List<Stmt> origStmts, int depth) {
 		List<Stmt> newStmts = new ArrayList<>();
 
 		// if goto
@@ -77,7 +77,7 @@ public class IRObfuscator {
 
 		LBlock elseBlock = generateLBlock();
 
-		Map<Integer, String> mapping = generateObfLocalMapping();
+		Map<Integer, String> mapping = generateObfLocalMapping(depth);
 
 		int localSize = ir.locals.size() * 2;
 		Local obfIndexFinal = Exprs.nLocal(++localSize,"obf_index_final");
@@ -194,19 +194,19 @@ public class IRObfuscator {
 		return Exprs.nInvokeVirtual(new Value[]{strLocal}, "Ljava/lang/String;","hashCode", new String[]{}, "I");
 	}
 
-	private Map<Integer, String> generateObfLocalMapping() {
+	private Map<Integer, String> generateObfLocalMapping(int depth) {
 		Map<Integer, String> mapping = new HashMap<>();
-		mapping.put(MAPPING_INDEX, randomString());
-		mapping.put(MAPPING_GOTO, randomString());
-		mapping.put(MAPPING_ELSE, randomString());
-		mapping.put(MAPPING_ENTER, randomString());
-		mapping.put(MAPPING_NEXT, randomString());
-		mapping.put(MAPPING_FAKE, randomString());
+		mapping.put(MAPPING_INDEX, randomString(depth));
+		mapping.put(MAPPING_GOTO, randomString(depth));
+		mapping.put(MAPPING_ELSE, randomString(depth));
+		mapping.put(MAPPING_ENTER, randomString(depth));
+		mapping.put(MAPPING_NEXT, randomString(depth));
+		mapping.put(MAPPING_FAKE, randomString(depth));
 
 		Set<String> set = new HashSet<>();
 		for (String value : mapping.values()) {
 			if (set.contains(value)) {
-				return generateObfLocalMapping();
+				return generateObfLocalMapping(depth);
 			} else {
 				set.add(value);
 			}
@@ -239,8 +239,8 @@ public class IRObfuscator {
 		return null;
 	}
 
-	private String randomString() {
-		int length = new Random().nextInt(5);
+	private String randomString(int depth) {
+		int length = new Random().nextInt(5 * depth);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			stringBuilder.append(ObfDic.dic[new Random().nextInt(ObfDic.dic.length - 1)]);
