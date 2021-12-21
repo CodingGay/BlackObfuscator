@@ -28,8 +28,8 @@ public class IRObfuscator {
 	public IRObfuscator(ObfuscatorConfiguration configuration) {
 		this.configuration = configuration;
 		this.chains = new LinkedList<>();
-		this.chains.add(new IfObfuscator());
 		this.chains.add(new SubObfuscator());
+		this.chains.add(new IfObfuscator());
 	}
 
 	public void reBuildInstructions(IrMethod ir) {
