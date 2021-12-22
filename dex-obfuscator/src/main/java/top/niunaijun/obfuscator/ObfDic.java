@@ -1,7 +1,8 @@
 package top.niunaijun.obfuscator;
 
 public class ObfDic {
-    public static String[] dic = ("0000O000000o\n" +
+    public static String[] dic = (
+            "0000O000000o\n" +
             "000O00000Oo\n" +
             "000O00000o0\n" +
             "000O00000o\n" +
