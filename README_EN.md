@@ -6,7 +6,6 @@ Black Obfuscator is an obfuscator for Android APK DexFile, it can help developer
 
 ## Declaration
 - This project was modified based on [dex2jar](https://github.com/pxb1988/dex2jar) .
-- The project is an initial version at present, this version pays attention to application stability, it will continue to be updated.
 - QQ Group: 390562046
 
 ## Matters Need Attention
