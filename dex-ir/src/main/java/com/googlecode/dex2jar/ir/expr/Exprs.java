@@ -34,11 +34,15 @@ public final class Exprs {
     }
 
     public static Constant nByte(byte i) {
-        return new Constant(i);
+        Constant constant = new Constant(i);
+        constant.valueType = "B";
+        return constant;
     }
 
     public static Constant nChar(char i) {
-        return new Constant(i);
+        Constant constant = new Constant(i);
+        constant.valueType = "C";
+        return constant;
     }
 
     public static Constant nType(String desc) {
@@ -49,11 +53,15 @@ public final class Exprs {
     }
 
     public static Constant nDouble(double i) {
-        return new Constant(i);
+        Constant constant = new Constant(i);
+        constant.valueType = "D";
+        return constant;
     }
 
     public static Constant nFloat(float i) {
-        return new Constant(i);
+        Constant constant = new Constant(i);
+        constant.valueType = "F";
+        return constant;
     }
 
     public static Constant nInt(int i) {
@@ -63,7 +71,9 @@ public final class Exprs {
     }
 
     public static Constant nLong(long i) {
-        return new Constant(i);
+        Constant constant = new Constant(i);
+        constant.valueType = "J";
+        return constant;
     }
 
     public static Constant nNull() {
@@ -71,7 +81,9 @@ public final class Exprs {
     }
 
     public static Constant nShort(short i) {
-        return new Constant(i);
+        Constant constant = new Constant(i);
+        constant.valueType = "S";
+        return constant;
     }
 
     public static Constant nString(String i) {

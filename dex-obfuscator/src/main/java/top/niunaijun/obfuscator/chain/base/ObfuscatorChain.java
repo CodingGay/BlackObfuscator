@@ -7,7 +7,12 @@ import top.niunaijun.obfuscator.RebuildIfResult;
 import java.util.List;
 
 public interface ObfuscatorChain {
+
+    boolean canDepth();
+
     boolean canHandle(IrMethod ir, Stmt stmt);
 
-    RebuildIfResult reBuild(IrMethod ir, Stmt stmt, List<Stmt> origStmts, int depth);
+    RebuildIfResult reBuild(IrMethod ir, Stmt stmt, List<Stmt> origStmts);
+
+    void reBuildEnd(IrMethod ir, List<Stmt> newStmts, List<Stmt> origStmts);
 }

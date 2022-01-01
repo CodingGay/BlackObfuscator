@@ -103,7 +103,7 @@ public class BlackObfuscatorCmd extends BaseCmd {
 
             new Dex2jarCmd(new ObfuscatorConfiguration() {
                 @Override
-                protected int getObfDepth() {
+                public int getObfDepth() {
                     return depth;
                 }
 

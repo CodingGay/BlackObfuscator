@@ -8,6 +8,7 @@ import com.googlecode.dex2jar.ir.expr.Local;
 import com.googlecode.dex2jar.ir.expr.Value;
 import com.googlecode.dex2jar.ir.stmt.*;
 import top.niunaijun.obfuscator.LBlock;
+import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 import top.niunaijun.obfuscator.RebuildIfResult;
 import top.niunaijun.obfuscator.chain.base.BaseObfuscatorChain;
 
@@ -25,13 +26,17 @@ public class IfObfuscator extends BaseObfuscatorChain {
     private static final int MAPPING_NEXT = 4;
     private static final int MAPPING_FAKE = 5;
 
+    public IfObfuscator(ObfuscatorConfiguration obfuscatorConfiguration) {
+        super(obfuscatorConfiguration);
+    }
+
     @Override
     public boolean canHandle(IrMethod ir, Stmt stmt) {
         return stmt.st == IF;
     }
 
     @Override
-    public RebuildIfResult reBuild0(IrMethod ir, Stmt stmt, List<Stmt> origStmts, int depth) {
+    public RebuildIfResult reBuild0(IrMethod ir, Stmt stmt, List<Stmt> origStmts) {
         List<Stmt> newStmts = new ArrayList<>();
         IfStmt ifStmt = (IfStmt) stmt;
         // if goto
@@ -134,6 +139,11 @@ public class IfObfuscator extends BaseObfuscatorChain {
             }
         }
         return new RebuildIfResult(newStmts);
+    }
+
+    @Override
+    public void reBuildEnd(IrMethod ir, List<Stmt> newStmts, List<Stmt> origStmts) {
+
     }
 
 

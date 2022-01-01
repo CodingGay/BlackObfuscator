@@ -2,9 +2,10 @@ package top.niunaijun.obfuscator;
 
 import com.googlecode.dex2jar.ir.IrMethod;
 import com.googlecode.dex2jar.ir.stmt.*;
+import top.niunaijun.obfuscator.chain.FlowObfuscator;
 import top.niunaijun.obfuscator.chain.IfObfuscator;
-import top.niunaijun.obfuscator.chain.base.ObfuscatorChain;
 import top.niunaijun.obfuscator.chain.SubObfuscator;
+import top.niunaijun.obfuscator.chain.base.ObfuscatorChain;
 
 import java.util.*;
 
@@ -28,8 +29,9 @@ public class IRObfuscator {
 	public IRObfuscator(ObfuscatorConfiguration configuration) {
 		this.configuration = configuration;
 		this.chains = new LinkedList<>();
-		this.chains.add(new SubObfuscator());
-		this.chains.add(new IfObfuscator());
+		this.chains.add(new FlowObfuscator(configuration));
+		this.chains.add(new SubObfuscator(configuration));
+		this.chains.add(new IfObfuscator(configuration));
 	}
 
 	public void reBuildInstructions(IrMethod ir) {
@@ -41,25 +43,28 @@ public class IRObfuscator {
 
 		for (ObfuscatorChain chain : chains) {
 			for (int i = 0; i < configuration.getObfDepth(); i++) {
-				List<Stmt> origStmts = new ArrayList<>();
 				List<Stmt> newStmts = new ArrayList<>();
+				List<Stmt> origStmts = new ArrayList<>();
 				for (Stmt value : ir.stmts) {
 					origStmts.add(value);
 				}
-
-				int depth = configuration.getObfDepth();
 				RebuildIfResult rebuildIfResult;
 				for (Stmt stmt : ir.stmts) {
 					if (chain.canHandle(ir, stmt)) {
-						rebuildIfResult = chain.reBuild(ir, stmt, origStmts, depth);
-						newStmts.addAll(rebuildIfResult.getResult());
+						rebuildIfResult = chain.reBuild(ir, stmt, origStmts);
+						if (rebuildIfResult != null) {
+							newStmts.addAll(rebuildIfResult.getResult());
+						}
 					} else {
 						newStmts.add(stmt);
 					}
 				}
-
+				chain.reBuildEnd(ir, newStmts, origStmts);
 				ir.stmts.clear();
 				ir.stmts.addAll(newStmts);
+				if (!chain.canDepth()) {
+					break;
+				}
 			}
 		}
 	}

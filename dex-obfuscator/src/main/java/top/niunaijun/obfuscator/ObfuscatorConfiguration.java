@@ -5,7 +5,7 @@ public abstract class ObfuscatorConfiguration {
 	/**
 	 * 混淆深度
 	 */
-	protected int getObfDepth() {
+	public int getObfDepth() {
 		return 1;
 	}
 
@@ -14,7 +14,7 @@ public abstract class ObfuscatorConfiguration {
 	 * @param className className
 	 * @param methodName methodName
 	 */
-	protected boolean accept(String className, String methodName){
+	public boolean accept(String className, String methodName) {
 		return true;
 	}
 }

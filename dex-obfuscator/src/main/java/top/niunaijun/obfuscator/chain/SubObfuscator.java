@@ -7,6 +7,7 @@ import com.googlecode.dex2jar.ir.expr.Local;
 import com.googlecode.dex2jar.ir.expr.Value;
 import com.googlecode.dex2jar.ir.stmt.Stmt;
 import com.googlecode.dex2jar.ir.stmt.Stmts;
+import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 import top.niunaijun.obfuscator.RebuildIfResult;
 import top.niunaijun.obfuscator.chain.base.BaseObfuscatorChain;
 
@@ -16,6 +17,10 @@ import java.util.Random;
 
 public class SubObfuscator extends BaseObfuscatorChain {
 
+    public SubObfuscator(ObfuscatorConfiguration obfuscatorConfiguration) {
+        super(obfuscatorConfiguration);
+    }
+
     @Override
     public boolean canHandle(IrMethod ir, Stmt stmt) {
         return stmt.st == Stmt.ST.ASSIGN ||
@@ -23,7 +28,7 @@ public class SubObfuscator extends BaseObfuscatorChain {
     }
 
     @Override
-    public RebuildIfResult reBuild0(IrMethod ir, Stmt stmt, List<Stmt> origStmts, int depth) {
+    public RebuildIfResult reBuild0(IrMethod ir, Stmt stmt, List<Stmt> origStmts) {
         List<Stmt> newStmts = new ArrayList<>();
         RebuildIfResult rebuildIfResult = new RebuildIfResult(newStmts);
         switch (stmt.st) {
@@ -38,6 +43,11 @@ public class SubObfuscator extends BaseObfuscatorChain {
                 break;
         }
         return rebuildIfResult;
+    }
+
+    @Override
+    public void reBuildEnd(IrMethod ir, List<Stmt> newStmts, List<Stmt> origStmts) {
+
     }
 
     private void reBuildAssign(IrMethod ir, Stmt stmt, List<Stmt> origStmts, List<Stmt> newStmts) {
