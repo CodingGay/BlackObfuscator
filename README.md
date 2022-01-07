@@ -16,14 +16,16 @@
 ## Android Studio插件支持
 目前本项目已集成Android Studio插件，支持打包自动化混淆。详情请移至：[BlackObfuscator-ASPlugin](https://github.com/CodingGay/BlackObfuscator-ASPlugin)
 
+GUI工具已开发完成，详情请移至：[BlackObfuscator-GUI](https://github.com/CodingGay/BlackObfuscator-GUI)
+
 ## 如何使用
 ### Main#main
 
 参数 | 解释
 ---|---
 -d | 混淆深度，越高混淆越深
--i | 输入dex
--o | 输出dex
+-i | 输入dex的路径 
+-o | 输出dex的路径 
 -a | 规则文件，见下一步骤
 -p | 需要进行混淆的包名
 
@@ -50,7 +52,7 @@ cn.kaicity
 
 ## 后续计划
 - 更高强度的混淆
-- 开发GUI
+- ~~开发GUI~~
 
 ## 效果展示
 ### 混淆前
