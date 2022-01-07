@@ -11,6 +11,7 @@ import org.jf.dexlib2.writer.io.MemoryDataStore;
 import org.jf.smali.Smali;
 import org.jf.smali.SmaliOptions;
 import org.jf.util.IndentingWriter;
+import org.jf.util.TrieTree;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -51,12 +52,13 @@ public class DexLib2Utils {
 
 			List<String> mateList = new ArrayList<>();
 
-			for (String sp : convertList) {
-				for (DexBackedClassDef def : defs) {
-					if (def.getType().contains(sp) && !mateList.contains(def.getType())) {
-						Smali.assembleSmaliFile(classToSmali(def), dexBuilder, new SmaliOptions());
-						mateList.add(def.getType());
-					}
+			// Use TrieTree to find the target classes
+			TrieTree tree = new TrieTree();
+			tree.addAll(convertList);
+			for (DexBackedClassDef def : defs) {
+				if (tree.search(def.getType())) {
+					mateList.add(def.getType());
+					Smali.assembleSmaliFile(classToSmali(def), dexBuilder, new SmaliOptions());
 				}
 			}
 
