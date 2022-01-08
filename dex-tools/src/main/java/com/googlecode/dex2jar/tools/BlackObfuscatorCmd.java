@@ -58,6 +58,11 @@ public class BlackObfuscatorCmd extends BaseCmd {
      */
     private final List<String> whileList = new ArrayList<>();
 
+    /**
+     * blackList
+     */
+    private final List<String> blackList = new ArrayList<>();
+
     public BlackObfuscatorCmd() {
     }
 
@@ -95,7 +100,7 @@ public class BlackObfuscatorCmd extends BaseCmd {
             File finalObfDex = obfDex;
             Runtime.getRuntime().addShutdownHook(new Thread(() -> deleteFile(finalTempJar, finalSplitDex, finalObfDex)));
 
-            long l = DexLib2Utils.splitDex(input.toFile(), splitDex, whileList);
+            long l = DexLib2Utils.splitDex(input.toFile(), splitDex, whileList, blackList);
             if (l <= 0) {
                 System.out.println("No classes found");
                 return;
@@ -170,10 +175,12 @@ public class BlackObfuscatorCmd extends BaseCmd {
 
         for (String rule : allowRule.split("\n")) {
             rule = rule.trim();
-            if (rule.startsWith("#")||rule.isEmpty()) {
+            if (rule.startsWith("#") || rule.isEmpty())
                 continue;
-            }
-            whileList.add(rule);
+            else if (rule.startsWith("!"))
+                blackList.add(rule.replaceFirst("!", ""));
+            else
+                whileList.add(rule);
         }
     }
 

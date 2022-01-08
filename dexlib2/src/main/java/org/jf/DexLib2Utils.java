@@ -36,33 +36,47 @@ public class DexLib2Utils {
 		}
 	}
 
-	public static long splitDex(File in, File out, List<String> className) {
+	public static long splitDex(File in, File out, List<String> whiteList, List<String> blackList) {
+		if (whiteList.size() == 0)
+			return 0;
+
 		try {
-			List<String> convertList = new ArrayList<>();
-			for (String s : className) {
-				if (!s.startsWith("L") && !s.endsWith(";")) {
-					convertList.add("L" + s.replace(".", "/"));
-				} else {
-					convertList.add(s);
-				}
+			/*
+			  Convert className to smali class format
+			  e.g. androidx.fragment.app.FragmentActivity ---> Landroidx/fragment/app/FragmentActivity
+			 */
+			for (int index = 0; index < whiteList.size(); index++) {
+				String rule = whiteList.get(index);
+				if (!rule.startsWith("L") && !rule.endsWith(";"))
+					whiteList.set(index, "L" + rule.replace(".", "/"));
 			}
+			for (int index = 0; index < blackList.size(); index++) {
+				String rule = blackList.get(index);
+				if (!rule.startsWith("L") && !rule.endsWith(";"))
+					blackList.set(index, "L" + rule.replace(".", "/"));
+			}
+
 			DexBackedDexFile dexBackedDexFile = loadBackedDexFile(in.getAbsolutePath());
 			DexBuilder dexBuilder = new DexBuilder(Opcodes.getDefault());
 			Set<? extends DexBackedClassDef> defs = dexBackedDexFile.getClasses();
 
-			List<String> mateList = new ArrayList<>();
+			List<String> allowList = new ArrayList<>();
 
 			// Use TrieTree to find the target classes
-			TrieTree tree = new TrieTree();
-			tree.addAll(convertList);
+			TrieTree whiteListTree = new TrieTree();
+			whiteListTree.addAll(whiteList);
+			TrieTree blackListTree = new TrieTree();
+			blackListTree.addAll(blackList);
+
 			for (DexBackedClassDef def : defs) {
-				if (tree.search(def.getType())) {
-					mateList.add(def.getType());
+				String className = def.getType();
+				if (whiteListTree.search(className) && !blackListTree.search(className)) {
+					allowList.add(className);
 					Smali.assembleSmaliFile(classToSmali(def), dexBuilder, new SmaliOptions());
 				}
 			}
 
-			return saveDexFileDexLib2(dexBuilder, out.getAbsolutePath()) ? mateList.size() : 0;
+			return saveDexFileDexLib2(dexBuilder, out.getAbsolutePath()) ? allowList.size() : 0;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
