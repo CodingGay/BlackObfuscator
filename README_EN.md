@@ -41,6 +41,10 @@ cn.kaicity.gk.cdk.BuildConfig
 #class
 cn.kaicity
 
+#blackList
+!cn.kaicity.gk.cdk
+
+#It will not obfuscate the package/class that in blackList
 ```
 
 ## Future plans

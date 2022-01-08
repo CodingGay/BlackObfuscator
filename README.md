@@ -48,6 +48,10 @@ cn.kaicity.gk.cdk.BuildConfig
 #package
 cn.kaicity
 
+#blackList
+!cn.kaicity.gk.cdk
+
+#blackList中的包或者类不会进行混淆
 ```
 
 ## 后续计划
