@@ -3,7 +3,7 @@ allprojects  {
   apply plugin: 'idea'
   apply plugin: 'eclipse'
   group = 'com.github.CodingGay.BlackObfuscator'
-  version = '2.0-SNAPSHOT'
+  version = '2.1-SNAPSHOT'
 }
 
 defaultTasks('clean','distZip')
