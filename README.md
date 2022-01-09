@@ -16,6 +16,7 @@
 ## Android Studio插件支持
 目前本项目已集成Android Studio插件，支持打包自动化混淆。详情请移至：[BlackObfuscator-ASPlugin](https://github.com/CodingGay/BlackObfuscator-ASPlugin)
 
+## GUI支持
 GUI工具已开发完成，详情请移至：[BlackObfuscator-GUI](https://github.com/CodingGay/BlackObfuscator-GUI)
 
 ## 如何使用
