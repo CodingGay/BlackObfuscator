@@ -48,9 +48,7 @@ cn.kaicity
 ```
 
 ## Future plans
-- Support Android Studio , obfuscate code automatically 
 - More powerful obfuscation
-- ~~Develop GUI~~
 
 ## Preview
 ### Original Code
