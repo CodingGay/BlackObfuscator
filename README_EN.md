@@ -11,6 +11,12 @@ Black Obfuscator is an obfuscator for Android APK DexFile, it can help developer
 ## Matters Need Attention
 - This project was based on dex2jar, please just obfuscate the business code, third party libraries excluded.
 
+## Android Studio Plugin
+The Android Studio Plugin version of this project has been developed, it supports obfuscating code automatically. More information about it are in [BlackObfuscator-ASPlugin](https://github.com/CodingGay/BlackObfuscator-ASPlugin)
+
+## GUI
+The graphical utility based on this project has been developed. More information about it are in [BlackObfuscator-GUI](https://github.com/CodingGay/BlackObfuscator-GUI)
+
 ## Usage
 ### Main#main
 
