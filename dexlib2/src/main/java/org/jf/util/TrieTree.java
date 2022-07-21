@@ -41,15 +41,23 @@ public class TrieTree {
     }
 
     public void add(String word) {
+        if (word == null)
+            return;
+
         TrieNode current = root;
         StringBuilder wordBuilder = new StringBuilder();
+
+        char content;
+        TrieNode node;
         for (int index = 0; index < word.length(); ++index) {
-            char content = word.charAt(index);
+            content = word.charAt(index);
             wordBuilder.append(content);
-            TrieNode node = new TrieNode(content, wordBuilder.toString());
+            node = new TrieNode(content, wordBuilder.toString());
             if (current.children.contains(node)) {
                 current = current.nextNode(content);
             } else {
+                if (index == word.length() - 1)
+                    node.isEnd = true;
                 current.children.add(node);
                 current = node;
             }
@@ -66,9 +74,14 @@ public class TrieTree {
     }
 
     public boolean search(String word) {
+        if (word == null)
+            return false;
+
         TrieNode current = root;
+
+        char content;
         for (int index = 0; index < word.length(); ++index) {
-            char content = word.charAt(index);
+            content = word.charAt(index);
 
             if (current.isEnd)
                 break;
@@ -79,6 +92,6 @@ public class TrieTree {
             else
                 return false;
         }
-        return true;
+        return current.isEnd;
     }
 }
