@@ -14,23 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.dex2jar.tools;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.security.KeyFactory;
-import java.security.PrivateKey;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
-import java.security.spec.PKCS8EncodedKeySpec;
-
-import com.googlecode.d2j.reader.zip.ZipUtil;
-import com.googlecode.d2j.signapk.AbstractJarSign;
-import com.googlecode.d2j.signapk.SunJarSignImpl;
-import com.googlecode.d2j.signapk.TinySignImpl;
+//package com.googlecode.dex2jar.tools;
+//
+//import java.io.File;
+//import java.io.IOException;
+//import java.nio.file.FileSystem;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+//import java.security.KeyFactory;
+//import java.security.PrivateKey;
+//import java.security.cert.CertificateFactory;
+//import java.security.cert.X509Certificate;
+//import java.security.spec.PKCS8EncodedKeySpec;
+//
+//import com.googlecode.d2j.reader.zip.ZipUtil;
+//import com.googlecode.d2j.signapk.AbstractJarSign;//import com.googlecode.d2j.signapk.SunJarSignImpl;
+//import com.googlecode.d2j.signapk.TinySignImpl;
 
 //@BaseCmd.Syntax(cmd = "d2j-apk-sign", syntax = "[options] <apk>", desc = "Sign an android apk file use a test certificate.")
 //public class ApkSign extends BaseCmd {
