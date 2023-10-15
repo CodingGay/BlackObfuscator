@@ -1,4 +1,4 @@
-package org.objectweb.asm2;
+package org.objectweb.asm;
 
 /***
  * Copyright (c) 2000-2011 INRIA, France Telecom
@@ -33,9 +33,9 @@ package org.objectweb.asm2;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.objectweb.asm2.ClassReader;
-import org.objectweb.asm2.ClassWriter;
-import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
 
 
 

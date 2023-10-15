@@ -5,10 +5,10 @@ dependencies {
   compile project(':dex-ir')
   compile project(':dex-obfuscator')
   compile project(':d2j-base-cmd')
-  compile project(':dx')
-//  compile 'org.ow2.asm:asm-debug-all:5.0.3'
+  implementation group: 'org.ow2.asm', name: 'asm-tree', version: '9.5'
+  implementation group: 'org.ow2.asm', name: 'asm-util', version: '9.5'
+  implementation group: 'org.ow2.asm', name: 'asm-commons', version: '9.5'
   testCompile project(':d2j-smali')
   testCompile project(':d2j-jasmin')
-  testCompile project(':ams')
 }
 

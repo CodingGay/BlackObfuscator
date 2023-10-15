@@ -29,7 +29,7 @@ import com.googlecode.d2j.visitors.DexClassVisitor;
 import com.googlecode.d2j.visitors.DexFileVisitor;
 
 /**
- * similar with org.objectweb.asm2.util.ASMifierClassVisitor
+ * similar with org.objectweb.asm.util.ASMifierClassVisitor
  * 
  * @author <a href="mailto:pxb1988@gmail.com">Panxiaobo</a>
  */

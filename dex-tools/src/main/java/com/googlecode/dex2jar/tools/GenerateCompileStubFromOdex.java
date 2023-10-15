@@ -4,7 +4,7 @@ import com.googlecode.d2j.dex.ClassVisitorFactory;
 import com.googlecode.d2j.dex.Dex2Asm;
 import com.googlecode.d2j.node.DexFileNode;
 import com.googlecode.d2j.reader.DexFileReader;
-import org.objectweb.asm2.*;
+import org.objectweb.asm.*;
 
 import java.io.File;
 import java.io.IOException;

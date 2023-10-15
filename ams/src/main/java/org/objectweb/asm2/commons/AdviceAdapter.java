@@ -27,21 +27,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.objectweb.asm2.Handle;
-import org.objectweb.asm2.Label;
-import org.objectweb.asm2.MethodVisitor;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 /**
- * A {@link org.objectweb.asm2.MethodVisitor} to insert before, after and around
+ * A {@link org.objectweb.asm.MethodVisitor} to insert before, after and around
  * advices in methods and constructors.
  * <p>
  * The behavior for constructors is like this:

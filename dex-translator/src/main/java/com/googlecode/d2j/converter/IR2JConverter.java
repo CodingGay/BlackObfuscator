@@ -31,7 +31,7 @@ import com.googlecode.dex2jar.ir.expr.Value.VT;
 import com.googlecode.dex2jar.ir.stmt.*;
 import com.googlecode.dex2jar.ir.stmt.Stmt.E2Stmt;
 import com.googlecode.dex2jar.ir.stmt.Stmt.ST;
-import org.objectweb.asm2.*;
+import org.objectweb.asm.*;
 import top.niunaijun.obfuscator.IRObfuscator;
 import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 

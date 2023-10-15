@@ -16,7 +16,6 @@
  */
 package com.googlecode.dex2jar.tools;
 
-import com.android.dex.util.FileUtils;
 import com.googlecode.d2j.dex.Dex2jar;
 import com.googlecode.d2j.reader.DexFileReader;
 import com.googlecode.dex2jar.ir.ET;
@@ -24,11 +23,11 @@ import org.jf.DexLib2Utils;
 import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @BaseCmd.Syntax(cmd = "d2j-black-obfuscator", syntax = "[options] <file0> [file1 ... fileN]", desc = "convert dex to jar")
@@ -171,7 +170,7 @@ public class BlackObfuscatorCmd extends BaseCmd {
             return;
         }
 
-        String allowRule = new String(FileUtils.readFile(allowList.toFile()));
+        String allowRule = new String(readFile(allowList.toFile()));
 
         for (String rule : allowRule.split("\n")) {
             rule = rule.trim();
@@ -182,6 +181,46 @@ public class BlackObfuscatorCmd extends BaseCmd {
             else
                 whileList.add(rule);
         }
+    }
+
+    private byte[] readFile(File file){
+        if (!file.exists()) {
+            throw new RuntimeException(file + ": file not found");
+        }
+
+        if (!file.isFile()) {
+            throw new RuntimeException(file + ": not a file");
+        }
+
+        if (!file.canRead()) {
+            throw new RuntimeException(file + ": file not readable");
+        }
+
+        long longLength = file.length();
+        int length = (int) longLength;
+        if (length != longLength) {
+            throw new RuntimeException(file + ": file too long");
+        }
+
+        byte[] result = new byte[length];
+
+        try {
+            FileInputStream in = new FileInputStream(file);
+            int at = 0;
+            while (length > 0) {
+                int amt = in.read(result, at, length);
+                if (amt == -1) {
+                    throw new RuntimeException(file + ": unexpected EOF");
+                }
+                at += amt;
+                length -= amt;
+            }
+            in.close();
+        } catch (IOException ex) {
+            throw new RuntimeException(file + ": trouble reading", ex);
+        }
+
+        return result;
     }
 
     private void deleteFile(File... files) {

@@ -27,7 +27,7 @@ import com.googlecode.d2j.visitors.DexClassVisitor;
 import com.googlecode.d2j.visitors.DexCodeVisitor;
 import com.googlecode.d2j.visitors.DexFileVisitor;
 import com.googlecode.d2j.visitors.DexMethodVisitor;
-import org.objectweb.asm2.Type;
+import org.objectweb.asm.Type;
 
 import java.lang.reflect.Modifier;
 import java.util.HashMap;

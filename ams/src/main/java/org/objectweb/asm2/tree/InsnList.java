@@ -27,12 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.tree;
+package org.objectweb.asm.tree;
 
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * A doubly linked list of {@link AbstractInsnNode} objects. <i>This

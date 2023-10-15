@@ -28,7 +28,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
 import java.util.Collections;
 import java.util.Map;

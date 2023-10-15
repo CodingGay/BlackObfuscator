@@ -28,12 +28,12 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
 import java.util.Stack;
 
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.signature.SignatureVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.signature.SignatureVisitor;
 
 /**
  * A {@link SignatureVisitor} adapter for type mapping.

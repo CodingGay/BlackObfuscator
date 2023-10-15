@@ -27,18 +27,18 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.objectweb.asm2.ClassReader;
-import org.objectweb.asm2.tree.ClassNode;
-import org.objectweb.asm2.tree.MethodNode;
-import org.objectweb.asm2.tree.TryCatchBlockNode;
-import org.objectweb.asm2.tree.analysis.Analyzer;
-import org.objectweb.asm2.tree.analysis.BasicValue;
-import org.objectweb.asm2.tree.analysis.BasicVerifier;
-import org.objectweb.asm2.tree.analysis.Frame;
-import org.objectweb.asm2.util.CheckClassAdapter;
-import org.objectweb.asm2.util.Printer;
-import org.objectweb.asm2.util.Textifier;
-import org.objectweb.asm2.util.TraceMethodVisitor;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.TryCatchBlockNode;
+import org.objectweb.asm.tree.analysis.Analyzer;
+import org.objectweb.asm.tree.analysis.BasicValue;
+import org.objectweb.asm.tree.analysis.BasicVerifier;
+import org.objectweb.asm.tree.analysis.Frame;
+import org.objectweb.asm.util.CheckClassAdapter;
+import org.objectweb.asm.util.Printer;
+import org.objectweb.asm.util.Textifier;
+import org.objectweb.asm.util.TraceMethodVisitor;
 
 import com.googlecode.dex2jar.tools.BaseCmd.Syntax;
 

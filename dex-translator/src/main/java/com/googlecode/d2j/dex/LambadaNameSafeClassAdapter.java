@@ -1,10 +1,10 @@
 package com.googlecode.d2j.dex;
 
-import org.objectweb.asm2.ClassVisitor;
-import org.objectweb.asm2.commons.Remapper;
-import org.objectweb.asm2.commons.RemappingClassAdapter;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.commons.ClassRemapper;
+import org.objectweb.asm.commons.Remapper;
 
-public class LambadaNameSafeClassAdapter extends RemappingClassAdapter {
+public class LambadaNameSafeClassAdapter extends ClassRemapper {
     public String getClassName() {
         return remapper.mapType(className);
     }

@@ -27,24 +27,24 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.objectweb.asm2.Handle;
-import org.objectweb.asm2.Label;
-import org.objectweb.asm2.MethodVisitor;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 /**
  * A {@link MethodVisitor} that keeps track of stack map frame changes between
  * {@link #visitFrame(int, int, Object[], int, Object[]) visitFrame} calls. This
  * adapter must be used with the
- * {@link org.objectweb.asm2.ClassReader#EXPAND_FRAMES} option. Each
+ * {@link org.objectweb.asm.ClassReader#EXPAND_FRAMES} option. Each
  * visit<i>X</i> instruction delegates to the next visitor in the chain, if any,
  * and then simulates the effect of this instruction on the stack map frame,
  * represented by {@link #locals} and {@link #stack}. The next visitor in the

@@ -27,21 +27,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.tree.analysis;
+package org.objectweb.asm.tree.analysis;
 
 import java.util.List;
 
-import org.objectweb.asm2.Handle;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
-import org.objectweb.asm2.tree.AbstractInsnNode;
-import org.objectweb.asm2.tree.FieldInsnNode;
-import org.objectweb.asm2.tree.IntInsnNode;
-import org.objectweb.asm2.tree.InvokeDynamicInsnNode;
-import org.objectweb.asm2.tree.LdcInsnNode;
-import org.objectweb.asm2.tree.MethodInsnNode;
-import org.objectweb.asm2.tree.MultiANewArrayInsnNode;
-import org.objectweb.asm2.tree.TypeInsnNode;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.FieldInsnNode;
+import org.objectweb.asm.tree.IntInsnNode;
+import org.objectweb.asm.tree.InvokeDynamicInsnNode;
+import org.objectweb.asm.tree.LdcInsnNode;
+import org.objectweb.asm.tree.MethodInsnNode;
+import org.objectweb.asm.tree.MultiANewArrayInsnNode;
+import org.objectweb.asm.tree.TypeInsnNode;
 
 /**
  * An {@link Interpreter} for {@link BasicValue} values.

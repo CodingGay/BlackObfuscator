@@ -27,11 +27,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.tree;
+package org.objectweb.asm.tree;
 
 import java.util.Map;
 
-import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * A node that represents a type instruction. A type instruction is an
@@ -43,7 +43,7 @@ public class TypeInsnNode extends AbstractInsnNode {
 
     /**
      * The operand of this instruction. This operand is an internal name (see
-     * {@link org.objectweb.asm2.Type}).
+     * {@link org.objectweb.asm.Type}).
      */
     public String desc;
 
@@ -55,7 +55,7 @@ public class TypeInsnNode extends AbstractInsnNode {
      *            opcode must be NEW, ANEWARRAY, CHECKCAST or INSTANCEOF.
      * @param desc
      *            the operand of the instruction to be constructed. This operand
-     *            is an internal name (see {@link org.objectweb.asm2.Type}).
+     *            is an internal name (see {@link org.objectweb.asm.Type}).
      */
     public TypeInsnNode(final int opcode, final String desc) {
         super(opcode);

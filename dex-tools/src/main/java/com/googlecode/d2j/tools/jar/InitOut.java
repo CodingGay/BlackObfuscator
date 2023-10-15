@@ -1,11 +1,11 @@
 package com.googlecode.d2j.tools.jar;
 
 import com.googlecode.dex2jar.tools.BaseCmd;
-import org.objectweb.asm2.ClassReader;
-import org.objectweb.asm2.ClassVisitor;
-import org.objectweb.asm2.FieldVisitor;
-import org.objectweb.asm2.MethodVisitor;
-import org.objectweb.asm2.tree.*;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.tree.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 import static com.googlecode.d2j.util.AccUtils.*;
-import static org.objectweb.asm2.Opcodes.*;
+import static org.objectweb.asm.Opcodes.*;
 
 public class InitOut {
     private static Set<String> keywords = new HashSet<String>(Arrays.asList("abstract", "continue", "for", "new",

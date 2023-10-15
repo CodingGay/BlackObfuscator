@@ -4,7 +4,7 @@ import com.googlecode.dex2jar.ir.Trap;
 import com.googlecode.dex2jar.ir.stmt.LabelStmt;
 import com.googlecode.dex2jar.ir.stmt.Stmt;
 import com.googlecode.dex2jar.ir.stmt.Stmts;
-import org.objectweb.asm2.Label;
+import org.objectweb.asm.Label;
 
 import java.util.ArrayList;
 import java.util.List;

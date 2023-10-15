@@ -28,13 +28,13 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
-import org.objectweb.asm2.Handle;
-import org.objectweb.asm2.Type;
-import org.objectweb.asm2.signature.SignatureReader;
-import org.objectweb.asm2.signature.SignatureVisitor;
-import org.objectweb.asm2.signature.SignatureWriter;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.signature.SignatureReader;
+import org.objectweb.asm.signature.SignatureVisitor;
+import org.objectweb.asm.signature.SignatureWriter;
 
 /**
  * A class responsible for remapping types and names. Subclasses can override

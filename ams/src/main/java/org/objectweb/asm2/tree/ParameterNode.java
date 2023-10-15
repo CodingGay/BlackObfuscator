@@ -27,9 +27,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.tree;
+package org.objectweb.asm.tree;
 
-import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * A node that represents a parameter access and name.
@@ -43,7 +43,7 @@ public class ParameterNode {
     public String name;
 
     /**
-     * The parameter's access flags (see {@link org.objectweb.asm2.Opcodes}).
+     * The parameter's access flags (see {@link org.objectweb.asm.Opcodes}).
      * Valid values are <tt>ACC_FINAL</tt>, <tt>ACC_SYNTHETIC</tt> and
      * <tt>ACC_MANDATED</tt>.
      */
@@ -55,7 +55,7 @@ public class ParameterNode {
      * @param access
      *            The parameter's access flags. Valid values are
      *            <tt>ACC_FINAL</tt>, <tt>ACC_SYNTHETIC</tt> or/and
-     *            <tt>ACC_MANDATED</tt> (see {@link org.objectweb.asm2.Opcodes}).
+     *            <tt>ACC_MANDATED</tt> (see {@link org.objectweb.asm.Opcodes}).
      * @param name
      *            the parameter's name.
      */

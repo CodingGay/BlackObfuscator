@@ -27,11 +27,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.util;
+package org.objectweb.asm.util;
 
-import org.objectweb.asm2.AnnotationVisitor;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 /**
  * An {@link AnnotationVisitor} that checks that its methods are properly used.

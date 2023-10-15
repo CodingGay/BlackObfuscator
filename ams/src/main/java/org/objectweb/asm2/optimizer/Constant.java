@@ -27,12 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.optimizer;
+package org.objectweb.asm.optimizer;
 
 import java.util.Arrays;
 
-import org.objectweb.asm2.ClassWriter;
-import org.objectweb.asm2.Handle;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Handle;
 
 /**
  * A constant pool item.

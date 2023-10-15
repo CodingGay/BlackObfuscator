@@ -21,9 +21,9 @@ import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.objectweb.asm2.ClassWriter;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.tree.ClassNode;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.ClassNode;
 
 import java.io.*;
 import java.net.URISyntaxException;

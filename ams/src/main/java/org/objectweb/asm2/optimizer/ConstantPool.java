@@ -27,13 +27,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.optimizer;
+package org.objectweb.asm.optimizer;
 
 import java.util.HashMap;
 
-import org.objectweb.asm2.Handle;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 /**
  * A constant pool.

@@ -27,17 +27,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.tree;
+package org.objectweb.asm.tree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.objectweb.asm2.AnnotationVisitor;
-import org.objectweb.asm2.Attribute;
-import org.objectweb.asm2.ClassVisitor;
-import org.objectweb.asm2.FieldVisitor;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.TypePath;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.Attribute;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.TypePath;
 
 /**
  * A node that represents a field.
@@ -47,7 +47,7 @@ import org.objectweb.asm2.TypePath;
 public class FieldNode extends FieldVisitor {
 
     /**
-     * The field's access flags (see {@link org.objectweb.asm2.Opcodes}). This
+     * The field's access flags (see {@link org.objectweb.asm.Opcodes}). This
      * field also indicates if the field is synthetic and/or deprecated.
      */
     public int access;
@@ -58,7 +58,7 @@ public class FieldNode extends FieldVisitor {
     public String name;
 
     /**
-     * The field's descriptor (see {@link org.objectweb.asm2.Type}).
+     * The field's descriptor (see {@link org.objectweb.asm.Type}).
      */
     public String desc;
 
@@ -125,12 +125,12 @@ public class FieldNode extends FieldVisitor {
      * 
      * @param access
      *            the field's access flags (see
-     *            {@link org.objectweb.asm2.Opcodes}). This parameter also
+     *            {@link org.objectweb.asm.Opcodes}). This parameter also
      *            indicates if the field is synthetic and/or deprecated.
      * @param name
      *            the field's name.
      * @param desc
-     *            the field's descriptor (see {@link org.objectweb.asm2.Type
+     *            the field's descriptor (see {@link org.objectweb.asm.Type
      *            Type}).
      * @param signature
      *            the field's signature.
@@ -159,12 +159,12 @@ public class FieldNode extends FieldVisitor {
      *            of {@link Opcodes#ASM4} or {@link Opcodes#ASM5}.
      * @param access
      *            the field's access flags (see
-     *            {@link org.objectweb.asm2.Opcodes}). This parameter also
+     *            {@link org.objectweb.asm.Opcodes}). This parameter also
      *            indicates if the field is synthetic and/or deprecated.
      * @param name
      *            the field's name.
      * @param desc
-     *            the field's descriptor (see {@link org.objectweb.asm2.Type
+     *            the field's descriptor (see {@link org.objectweb.asm.Type
      *            Type}).
      * @param signature
      *            the field's signature.
