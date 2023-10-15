@@ -4,4 +4,4 @@ include 'dexlib2'
 include 'dex-obfuscator'
 include 'main'
 include 'dx'
-
+include "asm"
