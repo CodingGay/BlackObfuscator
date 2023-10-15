@@ -27,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2;
+package org.objectweb.asm;
 
 /**
  * A visitor to visit a Java method. The methods of this class must be called in

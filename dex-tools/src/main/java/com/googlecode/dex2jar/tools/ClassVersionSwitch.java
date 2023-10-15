@@ -1,10 +1,10 @@
 package com.googlecode.dex2jar.tools;
 
 
-import org.objectweb.asm2.ClassReader;
-import org.objectweb.asm2.ClassVisitor;
-import org.objectweb.asm2.ClassWriter;
-import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
 
 import java.io.File;
 import java.io.FileOutputStream;

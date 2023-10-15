@@ -27,11 +27,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.tree;
+package org.objectweb.asm.tree;
 
 import java.util.Map;
 
-import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 /**
  * A node that represents a field instruction. A field instruction is an
@@ -43,7 +43,7 @@ public class FieldInsnNode extends AbstractInsnNode {
 
     /**
      * The internal name of the field's owner class (see
-     * {@link org.objectweb.asm2.Type#getInternalName() getInternalName}).
+     * {@link org.objectweb.asm.Type#getInternalName() getInternalName}).
      */
     public String owner;
 
@@ -53,7 +53,7 @@ public class FieldInsnNode extends AbstractInsnNode {
     public String name;
 
     /**
-     * The field's descriptor (see {@link org.objectweb.asm2.Type}).
+     * The field's descriptor (see {@link org.objectweb.asm.Type}).
      */
     public String desc;
 
@@ -65,12 +65,12 @@ public class FieldInsnNode extends AbstractInsnNode {
      *            opcode must be GETSTATIC, PUTSTATIC, GETFIELD or PUTFIELD.
      * @param owner
      *            the internal name of the field's owner class (see
-     *            {@link org.objectweb.asm2.Type#getInternalName()
+     *            {@link org.objectweb.asm.Type#getInternalName()
      *            getInternalName}).
      * @param name
      *            the field's name.
      * @param desc
-     *            the field's descriptor (see {@link org.objectweb.asm2.Type}).
+     *            the field's descriptor (see {@link org.objectweb.asm.Type}).
      */
     public FieldInsnNode(final int opcode, final String owner,
             final String name, final String desc) {

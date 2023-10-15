@@ -162,7 +162,12 @@ public class OneLocalsArray extends LocalsArray {
         TypeBearer result = locals[idx];
 
         if (result == null) {
-            return throwSimException(idx, "invalid");
+            try {
+                throwSimException(idx, "invalid");
+            }catch (Exception e){
+                e.printStackTrace();
+                throw e;
+            }
         }
 
         return result;

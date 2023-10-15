@@ -8,6 +8,8 @@ repositories {
 
 dependencies {
     compile project(':dex-ir')
-    compile project(':ams')
+    implementation group: 'org.ow2.asm', name: 'asm-tree', version: '9.5'
+    implementation group: 'org.ow2.asm', name: 'asm-util', version: '9.5'
+
 //    compile 'org.ow2.asm:asm-debug-all:5.0.3'
 }

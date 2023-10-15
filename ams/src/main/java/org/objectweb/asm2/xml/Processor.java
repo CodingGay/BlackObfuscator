@@ -27,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.xml;
+package org.objectweb.asm.xml;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -54,8 +54,8 @@ import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamSource;
 
-import org.objectweb.asm2.ClassReader;
-import org.objectweb.asm2.ClassWriter;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;

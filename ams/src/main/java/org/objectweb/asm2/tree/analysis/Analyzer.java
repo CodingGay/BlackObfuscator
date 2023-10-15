@@ -27,25 +27,25 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.tree.analysis;
+package org.objectweb.asm.tree.analysis;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
-import org.objectweb.asm2.tree.AbstractInsnNode;
-import org.objectweb.asm2.tree.IincInsnNode;
-import org.objectweb.asm2.tree.InsnList;
-import org.objectweb.asm2.tree.JumpInsnNode;
-import org.objectweb.asm2.tree.LabelNode;
-import org.objectweb.asm2.tree.LookupSwitchInsnNode;
-import org.objectweb.asm2.tree.MethodNode;
-import org.objectweb.asm2.tree.TableSwitchInsnNode;
-import org.objectweb.asm2.tree.TryCatchBlockNode;
-import org.objectweb.asm2.tree.VarInsnNode;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.IincInsnNode;
+import org.objectweb.asm.tree.InsnList;
+import org.objectweb.asm.tree.JumpInsnNode;
+import org.objectweb.asm.tree.LabelNode;
+import org.objectweb.asm.tree.LookupSwitchInsnNode;
+import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.TableSwitchInsnNode;
+import org.objectweb.asm.tree.TryCatchBlockNode;
+import org.objectweb.asm.tree.VarInsnNode;
 
 /**
  * A semantic bytecode analyzer. <i>This class does not fully check that JSR and

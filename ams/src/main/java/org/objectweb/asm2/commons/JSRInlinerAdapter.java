@@ -27,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -39,23 +39,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.objectweb.asm2.Label;
-import org.objectweb.asm2.MethodVisitor;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
-import org.objectweb.asm2.tree.AbstractInsnNode;
-import org.objectweb.asm2.tree.InsnList;
-import org.objectweb.asm2.tree.InsnNode;
-import org.objectweb.asm2.tree.JumpInsnNode;
-import org.objectweb.asm2.tree.LabelNode;
-import org.objectweb.asm2.tree.LocalVariableNode;
-import org.objectweb.asm2.tree.LookupSwitchInsnNode;
-import org.objectweb.asm2.tree.MethodNode;
-import org.objectweb.asm2.tree.TableSwitchInsnNode;
-import org.objectweb.asm2.tree.TryCatchBlockNode;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.InsnList;
+import org.objectweb.asm.tree.InsnNode;
+import org.objectweb.asm.tree.JumpInsnNode;
+import org.objectweb.asm.tree.LabelNode;
+import org.objectweb.asm.tree.LocalVariableNode;
+import org.objectweb.asm.tree.LookupSwitchInsnNode;
+import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.TableSwitchInsnNode;
+import org.objectweb.asm.tree.TryCatchBlockNode;
 
 /**
- * A {@link org.objectweb.asm2.MethodVisitor} that removes JSR instructions and
+ * A {@link org.objectweb.asm.MethodVisitor} that removes JSR instructions and
  * inlines the referenced subroutines.
  * 
  * <b>Explanation of how it works</b> TODO

@@ -27,12 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.tree;
+package org.objectweb.asm.tree;
 
 import java.util.Map;
 
-import org.objectweb.asm2.MethodVisitor;
-import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * A node that represents a MULTIANEWARRAY instruction.
@@ -42,7 +42,7 @@ import org.objectweb.asm2.Opcodes;
 public class MultiANewArrayInsnNode extends AbstractInsnNode {
 
     /**
-     * An array type descriptor (see {@link org.objectweb.asm2.Type}).
+     * An array type descriptor (see {@link org.objectweb.asm.Type}).
      */
     public String desc;
 
@@ -55,7 +55,7 @@ public class MultiANewArrayInsnNode extends AbstractInsnNode {
      * Constructs a new {@link MultiANewArrayInsnNode}.
      * 
      * @param desc
-     *            an array type descriptor (see {@link org.objectweb.asm2.Type}).
+     *            an array type descriptor (see {@link org.objectweb.asm.Type}).
      * @param dims
      *            number of dimensions of the array to allocate.
      */

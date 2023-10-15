@@ -27,7 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.util;
+package org.objectweb.asm.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -39,19 +39,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.objectweb.asm2.AnnotationVisitor;
-import org.objectweb.asm2.Attribute;
-import org.objectweb.asm2.Handle;
-import org.objectweb.asm2.Label;
-import org.objectweb.asm2.MethodVisitor;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
-import org.objectweb.asm2.TypePath;
-import org.objectweb.asm2.TypeReference;
-import org.objectweb.asm2.tree.MethodNode;
-import org.objectweb.asm2.tree.analysis.Analyzer;
-import org.objectweb.asm2.tree.analysis.BasicValue;
-import org.objectweb.asm2.tree.analysis.BasicVerifier;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.Attribute;
+import org.objectweb.asm.Handle;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.TypePath;
+import org.objectweb.asm.TypeReference;
+import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.analysis.Analyzer;
+import org.objectweb.asm.tree.analysis.BasicValue;
+import org.objectweb.asm.tree.analysis.BasicVerifier;
 
 /**
  * A {@link MethodVisitor} that checks that its methods are properly used. More
@@ -60,7 +60,7 @@ import org.objectweb.asm2.tree.analysis.BasicVerifier;
  * arguments - such as the fact that the given opcode is correct for a given
  * visit method. This adapter can also perform some basic data flow checks (more
  * precisely those that can be performed without the full class hierarchy - see
- * {@link org.objectweb.asm2.tree.analysis.BasicVerifier}). For instance in a
+ * {@link org.objectweb.asm.tree.analysis.BasicVerifier}). For instance in a
  * method whose signature is <tt>void m ()</tt>, the invalid instruction
  * IRETURN, or the invalid sequence IADD L2I will be detected if the data flow
  * checks are enabled. These checks are enabled by using the

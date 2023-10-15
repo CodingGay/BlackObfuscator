@@ -15,10 +15,10 @@
  */
 package com.googlecode.d2j.asm;
 
-import org.objectweb.asm2.ClassVisitor;
-import org.objectweb.asm2.MethodVisitor;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.Type;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 /**
  * @author <a href="mailto:pxb1988@gmail.com">Panxiaobo</a>
@@ -36,7 +36,7 @@ public class LdcOptimizeAdapter extends MethodVisitor implements Opcodes {
     /*
      * (non-Javadoc)
      * 
-     * @see org.objectweb.asm2.MethodAdapter#visitLdcInsn(java.lang.Object)
+     * @see org.objectweb.asm.MethodAdapter#visitLdcInsn(java.lang.Object)
      */
     @Override
     public void visitLdcInsn(Object cst) {

@@ -27,10 +27,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.util;
+package org.objectweb.asm.util;
 
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.signature.SignatureVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.signature.SignatureVisitor;
 
 /**
  * A {@link SignatureVisitor} that prints a disassembled view of the signature

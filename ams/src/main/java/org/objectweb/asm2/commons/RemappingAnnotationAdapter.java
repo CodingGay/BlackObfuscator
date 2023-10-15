@@ -28,10 +28,10 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
-import org.objectweb.asm2.AnnotationVisitor;
-import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * An {@link AnnotationVisitor} adapter for type remapping.

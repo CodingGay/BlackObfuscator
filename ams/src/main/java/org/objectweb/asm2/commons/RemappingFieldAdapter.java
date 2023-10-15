@@ -28,12 +28,12 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
-import org.objectweb.asm2.AnnotationVisitor;
-import org.objectweb.asm2.FieldVisitor;
-import org.objectweb.asm2.Opcodes;
-import org.objectweb.asm2.TypePath;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.TypePath;
 
 /**
  * A {@link FieldVisitor} adapter for type remapping.

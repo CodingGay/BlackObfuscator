@@ -28,7 +28,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.objectweb.asm2;
+package org.objectweb.asm;
 
 /**
  * A reference to a field or a method.

@@ -16,7 +16,7 @@
 package com.googlecode.d2j;
 
 /**
- * a light weight version of org.objectweb.asm2.Label
+ * a light weight version of org.objectweb.asm.Label
  * 
  * @author Panxiaobo
  * @version $Rev$

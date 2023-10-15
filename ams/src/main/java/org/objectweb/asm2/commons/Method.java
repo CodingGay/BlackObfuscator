@@ -27,12 +27,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.commons;
+package org.objectweb.asm.commons;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.objectweb.asm2.Type;
+import org.objectweb.asm.Type;
 
 /**
  * A named method descriptor.

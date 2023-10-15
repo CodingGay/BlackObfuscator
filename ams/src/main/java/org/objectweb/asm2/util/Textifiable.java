@@ -27,14 +27,14 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.objectweb.asm2.util;
+package org.objectweb.asm.util;
 
 import java.util.Map;
 
-import org.objectweb.asm2.Label;
+import org.objectweb.asm.Label;
 
 /**
- * An {@link org.objectweb.asm2.Attribute Attribute} that can print a readable
+ * An {@link org.objectweb.asm.Attribute Attribute} that can print a readable
  * representation of itself.
  * 
  * Implementations should construct readable output from an attribute data

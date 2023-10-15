@@ -29,10 +29,10 @@ import java.util.Map;
 
 import com.googlecode.d2j.node.DexMethodNode;
 import com.googlecode.d2j.reader.BaseDexFileReader;
-import org.objectweb.asm2.ClassVisitor;
-import org.objectweb.asm2.ClassWriter;
-import org.objectweb.asm2.MethodVisitor;
-import org.objectweb.asm2.Opcodes;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import com.googlecode.d2j.converter.IR2JConverter;
 import com.googlecode.d2j.node.DexFileNode;
@@ -41,8 +41,6 @@ import com.googlecode.d2j.reader.zip.ZipUtil;
 import com.googlecode.dex2jar.ir.IrMethod;
 import com.googlecode.dex2jar.ir.stmt.LabelStmt;
 import com.googlecode.dex2jar.ir.stmt.Stmt;
-import org.objectweb.asm2.commons.Remapper;
-import org.objectweb.asm2.commons.RemappingClassAdapter;
 import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 
 public class Dex2jar {
@@ -83,7 +81,7 @@ public class Dex2jar {
         readerConfig |= DexFileReader.SKIP_DEBUG;
     }
 
-    private void doTranslate(final Path dist) throws IOException {
+    private void doTranslate(final Path dist) {
 
         DexFileNode fileNode = new DexFileNode();
         try {
@@ -96,7 +94,7 @@ public class Dex2jar {
             public ClassVisitor create(final String name) {
                 final ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
                 final LambadaNameSafeClassAdapter rca = new LambadaNameSafeClassAdapter(cw);
-                return new ClassVisitor(Opcodes.ASM5, rca) {
+                return new ClassVisitor(Opcodes.ASM9, rca) {
                     @Override
                     public void visitEnd() {
                         super.visitEnd();
@@ -106,7 +104,7 @@ public class Dex2jar {
                             // FIXME handle 'java.lang.RuntimeException: Method code too large!'
                             data = cw.toByteArray();
                         } catch (Exception ex) {
-                            System.err.println(String.format("ASM fail to generate .class file: %s", className));
+                            System.err.printf("ASM fail to generate .class file: %s%n", className);
                             exceptionHandler.handleFileException(ex);
                             return;
                         }

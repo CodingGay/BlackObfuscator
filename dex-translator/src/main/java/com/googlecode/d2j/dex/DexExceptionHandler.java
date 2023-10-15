@@ -18,7 +18,7 @@ package com.googlecode.d2j.dex;
 
 import com.googlecode.d2j.Method;
 import com.googlecode.d2j.node.DexMethodNode;
-import org.objectweb.asm2.MethodVisitor;
+import org.objectweb.asm.MethodVisitor;
 
 public interface DexExceptionHandler {
     public void handleFileException(Exception e);

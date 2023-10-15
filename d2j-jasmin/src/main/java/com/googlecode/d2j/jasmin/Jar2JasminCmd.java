@@ -18,11 +18,10 @@ package com.googlecode.d2j.jasmin;
 
 import com.googlecode.dex2jar.tools.BaseCmd;
 import com.googlecode.dex2jar.tools.BaseCmd.Syntax;
-import org.objectweb.asm2.ClassReader;
-import org.objectweb.asm2.tree.ClassNode;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.tree.ClassNode;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
 import java.nio.file.*;
@@ -78,7 +77,7 @@ public class Jar2JasminCmd extends BaseCmd {
         }
     }
 
-    private void disassemble0(Path in, final Path output) throws IOException, URISyntaxException {
+    private void disassemble0(Path in, final Path output) throws IOException {
         if (Files.isDirectory(in)) { // a dir
             travelFileTree(in, output);
         } else if (in.toString().endsWith(".class")) {
