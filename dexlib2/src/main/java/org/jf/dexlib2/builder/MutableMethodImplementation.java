@@ -104,6 +104,9 @@ public class MutableMethodImplementation implements MethodImplementation {
 
         for (DebugItem debugItem: methodImplementation.getDebugItems()) {
             int debugCodeAddress = debugItem.getCodeAddress();
+            if (debugCodeAddress >= codeAddressToIndex.length) {
+                continue;
+            }
             int locationIndex = mapCodeAddressToIndex(codeAddressToIndex, debugCodeAddress);
             MethodLocation debugLocation = instructionList.get(locationIndex);
             BuilderDebugItem builderDebugItem = convertDebugItem(debugItem);
